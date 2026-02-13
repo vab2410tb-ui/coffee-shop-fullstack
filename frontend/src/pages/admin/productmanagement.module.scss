@@ -1,0 +1,70 @@
+
+
+.container {
+    background-color: #f2f2f2;
+    padding-bottom: 100px;
+
+    h1{
+        padding: 30px 0 0 50px;
+        font-size: 40px;
+    }
+
+    .form {
+        background-color: #fff;
+        margin-inline: 100px;
+        margin-bottom: 80px;
+        padding-bottom: 50px;
+
+        .btn_edit {
+            margin-left: 130px;
+            font-size: 24px;
+            padding: 3px 25px 3px 25px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+
+            &:hover {
+                background-color: #080808;
+                color: #fff;
+                cursor: pointer;
+            }
+        }  
+    }
+
+    .table {
+        margin-inline: 100px;
+        background-color: #fff;
+        
+        .line {
+           margin-top: 20px;
+            width: 100%;
+            border-bottom: 2px solid #acacac;
+        }
+        
+        h3 {
+            font-size: 32px;
+            padding: 20px 0 0 20px;
+            color: #6c6c6c;
+
+        }
+        .tab {
+            margin: 20px 0 0 20px;
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .srcbar {
+            position: relative;
+            margin: 20px 0 40px 20px;
+            .icon {
+                font-size: 20px;
+                position: absolute;
+                top: 10px;
+                left: 450px;
+            }
+
+        }
+    }
+    
+
+
+}

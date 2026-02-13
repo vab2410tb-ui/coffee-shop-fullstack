@@ -1,0 +1,160 @@
+.container {
+    max-width: 1920px;
+    height: auto;
+    background-color: #fff;
+    margin-top: 60px;
+
+    border-radius: 10px;
+
+    h3 {
+        font-size: 32px;
+        padding: 20px 0 0 20px;
+        color: #6c6c6c;
+    }
+
+    .line {
+        margin-top: 20px;
+        width: 100%;
+        border-bottom: 2px solid #acacac;
+    }
+    // FILL INFORMATION
+    .adProductform {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-left: 80px;
+    }
+
+    
+    .form1 {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-top: 35px;
+
+        label {
+            font-size: 24px;
+            padding-bottom: 15px;
+        }
+
+        input {
+            max-width: 500px;
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid;
+            padding-left: 15px;
+            font-size: 18px;
+        }
+        
+        select {
+            max-width: 500px;
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid;
+            font-size: 18px;
+            padding-left: 15px;
+
+            option {
+                font-size: 18px;
+
+            }
+        }
+
+        .errorInput {
+            color: red;
+        }
+
+        .errorText {
+            color: red;
+        }
+
+
+    }
+    // UPDATE IMG 
+    .update_img{
+        margin-top: 35px;
+        margin-left: 80px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        .errorInput {
+            color: red;
+        }
+
+        .errorText {
+            color: red;
+        }
+
+        .main_image {
+        
+            label{
+                font-size: 24px;
+                padding-bottom: 10px;
+            }
+
+            .upImg{
+                position: relative;
+                padding-top: 15px;
+            }
+            button {
+                position: absolute;
+                top: 10px;
+                left: 190px;
+                font-size: 15px;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: rgb(228, 112, 112);
+                
+            }
+         }
+
+        .details_image {
+            label{
+                font-size: 24px;
+                padding-bottom: 10px;
+            }
+
+            .upImg{
+                position: relative;
+                padding-top: 15px;
+            }
+            button {
+                position: absolute;
+                top: 10px;
+                left: 110px;
+                font-size: 15px;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: rgb(228, 112, 112);
+                
+            }
+        }
+    }
+    .submit {
+        margin: 50px 0 50px 80px;
+        font-size: 24px;
+        padding: 3px 25px 3px 25px;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+
+        &:hover {
+            background-color: #080808;
+            color: #fff;
+            cursor: pointer;
+        }
+        &:disabled {
+            background: #ccc;        
+            color: #666;
+            cursor: not-allowed;     
+            opacity: 0.8;
+        }
+    }
+   
+    
+    
+}

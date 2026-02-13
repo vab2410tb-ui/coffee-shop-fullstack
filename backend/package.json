@@ -1,0 +1,40 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "backend",
+    "nodejs",
+    "express"
+  ],
+  "homepage": "https://github.com/vab2410tb-ui/Web-demo#readme",
+  "bugs": {
+    "url": "https://github.com/vab2410tb-ui/Web-demo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vab2410tb-ui/Web-demo.git"
+  },
+  "license": "ISC",
+  "author": "binh dev",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": " nodemon --inspect src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cloudinary": "^2.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.0.1",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "multer-storage-cloudinary": "^4.0.0",
+    "slugify": "^1.6.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
