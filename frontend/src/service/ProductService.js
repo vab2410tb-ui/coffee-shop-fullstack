@@ -1,54 +1,49 @@
 // src/services/productService.js
-import axios from 'axios';
-
-const API_URL = "http://localhost:8000/api/v1/admin/products";
-
-
-const axiosClient = axios.create({
-    baseURL: API_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-});
+import axiosClient from './ClientService.js';
 
 const ProductService = {
-    // 1. Lấy tất cả sản phẩm
-    getAll: async (keyword = "", category = "all", sort = "") => {
-    const response = await axiosClient.get('/', {
-        params: {
-            name: keyword,
-            category,
-            sort
-        }
-    });
-    return response.data;
-},
+    // 1. Lấy sản phẩm theo danh mục (Dành cho khách hàng)
+    // URL đúng: http://localhost:8000/api/v1/products/category/:slug
+    getProductsByCategory: async (slug) => {
+        // shopRouter được gắn vào /api/v1/products
+        const url = `/products/category/${slug}`; 
+        return axiosClient.get(url);
+    },
 
-
-    // 2. Lấy chi tiết 1 sản phẩm
+    // 2. Lấy chi tiết 1 sản phẩm (Dùng trong Admin Form)
+    // URL đúng: http://localhost:8000/api/v1/admin/products/:id
     get: async (id) => {
-        const response = await axiosClient.get(`/${id}`);
-        return response.data;
+        // productAdminRouter được gắn vào /api/v1/admin/products
+        const url = `/admin/products/${id}`; 
+        return axiosClient.get(url);
     },
 
-    // 3. Tạo mới sản phẩm
+    // --- DÀNH CHO ADMIN (QUẢN LÝ) ---
+    getAll: async (searchTerm, filterType, sortOrder) => {
+        const url = '/admin/products';
+        return axiosClient.get(url, { 
+            params: {
+            name: searchTerm,    
+            category: filterType, 
+            sort: sortOrder
+            }
+         });
+    },
+    
     create: async (data) => {
-        const response = await axiosClient.post('/', data);
-        return response.data;
+        const url = '/admin/products';
+        return axiosClient.post(url, data);
     },
 
-    // 4. Cập nhật sản phẩm
     update: async (id, data) => {
-        const response = await axiosClient.put(`/${id}`, data);
-        return response.data;
+        const url = `/admin/products/${id}`;
+        return axiosClient.put(url, data);
     },
 
-    // 5. Xóa sản phẩm
     remove: async (id) => {
-        const response = await axiosClient.delete(`/${id}`);
-        return response.data;
+        const url = `/admin/products/${id}`;
+        return axiosClient.delete(url);
     },
-
 };
 
 export default ProductService;

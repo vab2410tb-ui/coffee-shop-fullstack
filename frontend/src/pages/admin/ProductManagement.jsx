@@ -19,9 +19,9 @@ function ProductManagement() {
   // Danh sách các bộ lọc
   const filters = [
     { id: 'all', label: 'ALL' },
-    { id: 'machine', label: 'ESSPRESSO MACHINE' },
-    { id: 'grinder', label: 'GRINDER MACHINE' },
-    { id: 'beans', label: 'COFFEE BEANS' },
+    { id: 'espresso-machine', label: 'ESSPRESSO MACHINE' },
+    { id: 'grinder-machine', label: 'GRINDER MACHINE' },
+    { id: 'coffee-beans', label: 'COFFEE BEANS' },
     { id: 'accessories', label: 'ACCESSORIES' },
   ];
 

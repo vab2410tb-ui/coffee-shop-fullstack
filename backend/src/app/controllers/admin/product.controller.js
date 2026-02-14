@@ -5,37 +5,37 @@ class ProductController {
     async index(req, res) {
         const { name, category, sort } = req.query; 
 
-    let condition = {};
+        let condition = {};
 
-    // GỘP: Tìm kiếm theo cả Tên hoặc SKU
-    if (name) {
-        condition.$or = [
-            { name: { $regex: new RegExp(name), $options: "i" } },
-            { sku: { $regex: new RegExp(name), $options: "i" } }
-        ];
-    }
+        // GỘP: Tìm kiếm theo cả Tên hoặc SKU
+        if (name) {
+            condition.$or = [
+                { name: { $regex: new RegExp(name), $options: "i" } },
+                { sku: { $regex: new RegExp(name), $options: "i" } }
+            ];
+        }
 
-    // Lọc theo loại
-    if (category && category !== 'all') {
-        condition.category = category;
-    }
+        // Lọc theo loại
+        if (category && category !== 'all') {
+            condition.category = category;
+        }
 
-    // Sắp xếp
-    let sortCondition = {};
-    if (sort === 'price_asc') {
-        sortCondition.price = 1; 
-    } else if (sort === 'price_desc') {
-        sortCondition.price = -1; 
-    } else {
-        sortCondition.createdAt = -1; // Mặc định mới nhất lên đầu
-    }
+        // Sắp xếp
+        let sortCondition = {};
+        if (sort === 'price_asc') {
+            sortCondition.price = 1; 
+        } else if (sort === 'price_desc') {
+            sortCondition.price = -1; 
+        } else {
+            sortCondition.createdAt = -1; // Mặc định mới nhất lên đầu
+        }
 
-    try {
-        const data = await Product.find(condition).sort(sortCondition);
-        res.send(data); // Trả về kết quả duy nhất tại đây
-    } catch (err) {
-        res.status(500).send({ message: err.message });
-    }
+        try {
+            const data = await Product.find(condition).sort(sortCondition);
+            res.send(data); // Trả về kết quả duy nhất tại đây
+        } catch (err) {
+            res.status(500).send({ message: err.message });
+        }
     }
     // [GET] /admin/product/:id
     async show(req, res) {

@@ -26,7 +26,7 @@ const productSchema = new mongoose.Schema({
   category: { 
     type: String, 
     required: true, 
-     enum: ['machine', 'grinder', 'beans', 'accessories']  // Chỉ chấp nhận 3 loại này
+     enum: ['espresso-machine', 'grinder-machine', 'coffee-beans', 'accessories']  // Chỉ chấp nhận 3 loại này
   },
 
   brand: { type: String, default: "La Marzocco" },

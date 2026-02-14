@@ -1,9 +1,19 @@
+// backend/routes/shop.router.js
 import express from 'express';
-const router = express.Router();
 import shopController from '../app/controllers/shop.controller.js';
 
-router.get('/', shopController.shop);
-router.get('/:slug', shopController.getDetail);
-// router.get('/:sku', shopController.getProductBySku);
+const router = express.Router();
+
+// 1. Route lấy theo danh mục
+// URL: /api/v1/products/category/espresso-machine
+router.get('/category/:slug', shopController.getProductsByCategory);
+
+// 2. Route lấy chi tiết 1 sản phẩm
+// URL: /api/v1/products/detail/:id
+router.get('/detail/:id', shopController.getProductDetail);
+
+// 3. Route lấy tất cả
+// URL: /api/v1/products
+router.get('/', shopController.getAllProducts);
 
 export default router;

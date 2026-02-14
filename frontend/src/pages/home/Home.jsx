@@ -4,26 +4,20 @@ import { faArrowUp,  } from '@fortawesome/free-solid-svg-icons';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons'
 import { SlideData, BeansData, AccData, ExploreData, BlogData } from '../../data/products.jsx'  
 import home from './home.module.scss'
-import Header from '../../components/Navbar/navbar.jsx'
-import Footer from '../../components/Footer/Footer.jsx'
 
 
 function ProductPriceInfo() {
     const [curIndex, setCurIndex] = useState(0)
     const [autoMoving, setAutoMoving] = useState(false)
 
-    const btnPre = () => {
-        const firstSlide = curIndex === 0;
-        const newSlide = firstSlide ? SlideData.length - 1 : curIndex -1;
-        setCurIndex(newSlide); 
-    };
+    // const btnPre = () => {
+    //     const firstSlide = curIndex === 0;
+    //     const newSlide = firstSlide ? SlideData.length - 1 : curIndex -1;
+    //     setCurIndex(newSlide); 
+    // };
 
    
-    const btnNxt = () => {
-        const lastSlide = curIndex === SlideData.length - 1;
-        const newSlide = lastSlide ? 0 : curIndex +1;
-        setCurIndex(newSlide); 
-    };
+    
     // Click DOT
     const moving = (index) => {
         if(autoMoving) return;
@@ -39,6 +33,11 @@ function ProductPriceInfo() {
 
     // Auto Moving
     useEffect(() => {
+        const btnNxt = () => {
+        const lastSlide = curIndex === SlideData.length - 1;
+        const newSlide = lastSlide ? 0 : curIndex +1;
+        setCurIndex(newSlide); 
+    };
         const timer = setTimeout(() => {
             btnNxt();
         }, 5000); 
@@ -50,10 +49,7 @@ function ProductPriceInfo() {
 
     return (
         <>
-        {/* BEGIN sections: Header */}
-        <Header/>
         <div className={home.container} style={{'--current-index': curIndex}}>
-
             {/* ========== MOTION PROCESSING ==========  */}
             <div className={home.sliderWrapper}>
                 {SlideData.map((item , index) =>(
@@ -79,7 +75,6 @@ function ProductPriceInfo() {
             </div>
             {/* ========== END MOTION PROCESSING ========== */}
         </div>
-        {/* END sections: Header */}
         
 
         {/* BEGIN sections: Intro products */}
@@ -164,7 +159,7 @@ function ProductPriceInfo() {
                 <h2>COFFEE BEANS</h2>
                 <div className={home.cardbeans}>
                     {BeansData.map((item, index) => (
-                        <div className={home.card}>
+                        <div className={home.card} key={index}>
                             <div>
                                 <img src={item.src} alt="" />
                             </div>
@@ -179,9 +174,9 @@ function ProductPriceInfo() {
             {/* SECTION FOUR */}
             <section className={`${home['introprd__section-2']}`}>
                 <h2>COFFEE BEANS</h2>
-                <div className={home.cardbeans}>
+                <div className={home.cardbeans} >
                     {AccData.map((item, index) => (
-                        <div className={home.card}>   
+                        <div className={home.card} key={index}>   
                             <div>
                                 <img src={item.src} alt="" />
                             </div>
@@ -200,7 +195,7 @@ function ProductPriceInfo() {
             <h2>EXPLORE #NABCOFFEESHOP</h2>
             <div className={home.girdlayout}>
                 {ExploreData.map((item, index) => (
-                    <img src={item.src} alt={`Coffee product ${index}`} />
+                    <img src={item.src} alt={`Coffee product ${index}`} key={index} />
                 
                 ))}
             </div>
@@ -221,9 +216,7 @@ function ProductPriceInfo() {
                 ))}
             </div>
         </div>
-        {/* END sections: BLOG  */}
-        
-        <Footer/>       
+        {/* END sections: BLOG  */}     
         </>
             
     );
