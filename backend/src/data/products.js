@@ -7,8 +7,18 @@ const products = [
     "price": 103000000,
     "groups": 1,
     "brand": "La Marzocco",
-    "mainImage": "https://res.cloudinary.com/drrao1nzd/image/upload/v1770302311/nab_coffee/products/main/qfoofjrlngmoizhttqpf.jpg"
-  },
+    "mainImage": "https://res.cloudinary.com/drrao1nzd/image/upload/v1770302311/nab_coffee/products/main/qfoofjrlngmoizhttqpf.jpg",
+    "techSpecs": {
+      "origin": "Italia",
+      "dimensions": "340 - 290 - 390 mm",
+      "weight": 19,
+      "voltage": "220V",
+      "wattage": "1850W",
+      "coffeeBoiler": "1.6 liters",
+      "steamBoiler": "0.25 liters",
+      "material": "Stainless Steel"
+    }
+},
   {
     "sku": "EM-MINI",
     "name": "LINEA MINI - LA MARZOCCO",

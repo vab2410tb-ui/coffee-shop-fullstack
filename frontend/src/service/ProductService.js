@@ -1,24 +1,27 @@
-// src/services/productService.js
-import axiosClient from './ClientService.js';
+import axiosClient from './clientService.js';
 
 const ProductService = {
     // 1. Lấy sản phẩm theo danh mục (Dành cho khách hàng)
-    // URL đúng: http://localhost:8000/api/v1/products/category/:slug
-    getProductsByCategory: async (slug) => {
+    // URL: http://localhost:8000/api/v1/products/category/:slug
+    getProductsByCategory: async (slug, sortOrder) => {
         // shopRouter được gắn vào /api/v1/products
         const url = `/products/category/${slug}`; 
-        return axiosClient.get(url);
+        return axiosClient.get(url, {
+            params: {
+                sort: sortOrder
+            }
+        });
     },
 
     // 2. Lấy chi tiết 1 sản phẩm (Dùng trong Admin Form)
-    // URL đúng: http://localhost:8000/api/v1/admin/products/:id
+    // http://localhost:8000/api/v1/admin/products/:id
     get: async (id) => {
         // productAdminRouter được gắn vào /api/v1/admin/products
         const url = `/admin/products/${id}`; 
         return axiosClient.get(url);
     },
 
-    // --- DÀNH CHO ADMIN (QUẢN LÝ) ---
+    // ADMIN 
     getAll: async (searchTerm, filterType, sortOrder) => {
         const url = '/admin/products';
         return axiosClient.get(url, { 

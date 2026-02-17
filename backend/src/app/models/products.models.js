@@ -2,19 +2,19 @@ import mongoose from 'mongoose';
 import slugify from 'slugify';
 
 const productSchema = new mongoose.Schema({
-  // --- THÔNG TIN CHUNG (Cái nào cũng có) ---
+  // Thông tin chung của sản phẩm
   sku: { 
     type: String, 
     required: true, 
-    unique: true, // Không được trùng nhau
+    unique: true, 
     trim: true,
-    uppercase: true // Tự động viết hoa (ví dụ: mp-01 -> MP-01)
+    uppercase: true 
   },
 
   slug: { 
     type: String, 
-    unique: true, // Không trùng lặp đường dẫn
-    index: true   // Giúp tìm kiếm nhanh hơn
+    unique: true, 
+    index: true   
   },
 
   name: { type: String, required: true, trim: true },
@@ -26,7 +26,7 @@ const productSchema = new mongoose.Schema({
   category: { 
     type: String, 
     required: true, 
-     enum: ['espresso-machine', 'grinder-machine', 'coffee-beans', 'accessories']  // Chỉ chấp nhận 3 loại này
+    enum: ['espresso-machine', 'grinder-machine', 'coffee-beans', 'accessories']  
   },
 
   brand: { type: String, default: "La Marzocco" },
@@ -38,21 +38,29 @@ const productSchema = new mongoose.Schema({
   description: { type: String },
 
   inStock: { type: Boolean, default: true },
-
-  // --- THÔNG TIN RIÊNG (Không bắt buộc - required: false) ---
   
-  // Dành cho MÁY PHA
-  groups: { type: Number }, // Số họng (1, 2, 3)
-  boilerType: { type: String }, // Nồi hơi (Kép/Đơn)
-
-  // Dành cho MÁY XAY
-  bladeType: { type: String }, // Lưỡi dao (Phẳng/Nón)
-  hopperCapacity: { type: String }, // Dung tích phễu (1kg, 1.5kg)
-
-  // Dành cho HẠT CÀ PHÊ
-  weight: { type: Number }, // Trọng lượng gói (gram)
-  roastLevel: { type: String }, // Độ rang (Light, Medium, Dark)
-  flavorProfile: { type: String } // Hương vị (Chocolata, Fruity...)
+  techSpecs: {
+    // 1. Nhóm dùng chung
+    origin: { type: String }, // Xuất xứ 
+    dimensions: { type: String },// H-W-D 
+    weight: { type: Number },// Trọng lượng 
+    voltage: { type: String },// Electrical Specs 
+    wattage: { type: String },// Wattage Elements 
+    
+    // 2. (Espresso Machine)
+    material: { type: String },// Material
+    amperage: { type: String },// Amperage
+    coffeeBoiler: { type: String },// Coffee Boiler 
+    steamBoiler: { type: String },// Steam Boiler 
+    
+    // 3. (Grinder)
+    burrs: { type: String },// Burrs 
+    hopperCapacity: { type: String },// Hopper Capacity
+    productivity: { type: String },// Productivity (g/s)
+    grindAdjustment: { type: String },// Grind Adjustment
+    grindingSpeed: { type: String },// Grinding Speed
+    programmableDose: { type: Boolean }// Programmable Dose (Yes -> true, No -> false)
+  },
 
 }, { timestamps: true });
 
@@ -64,7 +72,6 @@ productSchema.pre('save', async function() {
       locale: 'vi' 
     });
   }
-  // Không cần gọi next(), Mongoose tự xử lý xong.
 });
 
 export default mongoose.model('Product', productSchema);

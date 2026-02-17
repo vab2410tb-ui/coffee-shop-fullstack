@@ -6,27 +6,32 @@
 
     border-radius: 10px;
 
-    h3 {
+    h2 {
         font-size: 32px;
         padding: 20px 0 0 20px;
         color: #6c6c6c;
+        margin-bottom: 40px;
+        text-align: center;
     }
-
+    h3 {
+        font-size: 28px;
+        padding: 20px 0 0 20px;
+        color: #6c6c6c;
+        
+    }
     .line {
         margin-top: 20px;
         width: 100%;
         border-bottom: 2px solid #acacac;
     }
+
     // FILL INFORMATION
     .adProductform {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 15px;
         margin-left: 80px;
-    }
-
-    
-    .form1 {
+        .form1 {
         display: grid;
         grid-template-columns: 1fr;
         margin-top: 35px;
@@ -69,6 +74,8 @@
 
 
     }
+    }
+    
     // UPDATE IMG 
     .update_img{
         margin-top: 35px;

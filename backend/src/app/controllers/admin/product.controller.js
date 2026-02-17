@@ -7,7 +7,7 @@ class ProductController {
 
         let condition = {};
 
-        // GỘP: Tìm kiếm theo cả Tên hoặc SKU
+        // tìm theo tên hoặc theo mã sku
         if (name) {
             condition.$or = [
                 { name: { $regex: new RegExp(name), $options: "i" } },
@@ -20,19 +20,19 @@ class ProductController {
             condition.category = category;
         }
 
-        // Sắp xếp
+        // Sắp xếp 
         let sortCondition = {};
         if (sort === 'price_asc') {
             sortCondition.price = 1; 
         } else if (sort === 'price_desc') {
             sortCondition.price = -1; 
         } else {
-            sortCondition.createdAt = -1; // Mặc định mới nhất lên đầu
+            sortCondition.createdAt = -1; 
         }
 
         try {
             const data = await Product.find(condition).sort(sortCondition);
-            res.send(data); // Trả về kết quả duy nhất tại đây
+            res.send(data);
         } catch (err) {
             res.status(500).send({ message: err.message });
         }
@@ -41,7 +41,7 @@ class ProductController {
     async show(req, res) {
         try {
             const product = await Product.findById(req.params.id);
-            if (!product) return res.status(404).json({ message: "Không tìm thấy" });
+            if (!product) return res.status(404).json({ message: "Not Found" });
             res.json(product);
         } catch (err) {
             res.status(500).json({ message: err.message });

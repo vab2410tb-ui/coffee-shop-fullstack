@@ -4,25 +4,45 @@ const shopController = {
     
     // [GET] /api/v1/products/category/:slug
     getProductsByCategory: async (req, res) => {
-        try {
-            const { slug } = req.params;
+    try {
+        const { slug } = req.params; 
+        const { sort } = req.query;  
 
-            // Tìm sản phẩm có category trùng với slug
-            const products = await Products.find({ category: slug });
-
-            return res.status(200).json({
-                success: true,
-                count: products.length,
-                data: products
-            });
-        } catch (error) {
-            console.error("Error fetching category:", error);
-            return res.status(500).json({
-                success: false,
-                message: "Lỗi Server khi lấy danh mục sản phẩm"
-            });
+        // 1. điều kiện lọc
+        const filter = { category: slug };
+        let sortCondition = {};
+        
+        if (sort === 'price_asc') {
+            sortCondition.price = 1;      
+        } else if (sort === 'price_desc') {
+            sortCondition.price = -1;     
+        } else if (sort === 'name_asc') {
+            sortCondition.name = 1;       
+        } else if (sort === 'name_desc') {
+            sortCondition.name = -1;      
+        } else {
+            sortCondition.createdAt = -1; 
         }
-    },
+
+        // 3. filter và sort
+        const products = await Products.find(filter).sort(sortCondition);
+
+        // 4. return 
+        return res.status(200).json({
+            success: true,
+            count: products.length,
+            data: products
+        });
+
+    } catch (error) {
+        // 5. xử lý lỗi
+        console.error("Error fetching category:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Lỗi Server khi lấy danh mục sản phẩm"
+        });
+    }
+},
 
     // [GET] /api/v1/products
     getAllProducts: async (req, res) => {

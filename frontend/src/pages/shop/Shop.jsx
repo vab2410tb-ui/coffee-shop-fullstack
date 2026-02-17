@@ -5,9 +5,10 @@ function Shop () {
     return (
         <>
         <div className={shop.container}>
-            <section className={shop.banner}>
+            <div className={shop.banner}>
+                <img src="https://res.cloudinary.com/drrao1nzd/image/upload/v1770301244/nab_coffee/products/main/uqx7jeunz3lonjaoztai.jpg" alt="" />
                 <h1>SHOP</h1>
-            </section>
+            </div>
             <h1>SHOP</h1>
             <section className={shop.category}>
                     <div className={shop.card}>

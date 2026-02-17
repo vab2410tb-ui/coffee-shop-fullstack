@@ -1,31 +1,3 @@
-// import mongoose from 'mongoose';
-// import Product from '../app/models/products.models.js'; 
-// import connectDB from '../config/db/index.js'; 
-// import productList from '../data/products.js'; 
-
-// const seedDB = async () => {
-//   // 1. Kết nối
-//   await connectDB();
-
-//   try {
-//     // 2. Xóa cũ
-//     await Product.deleteMany({});
-//     console.log("Đã dọn sạch dữ liệu cũ.");
-
-//     // 3. Thêm mới (Dùng biến productList đã import)
-//     await Product.insertMany(productList);
-//     console.log("Đã thêm dữ liệu thành công!");
-
-//   } catch (error) {
-//     console.error("Lỗi:", error);
-//   } finally {
-//     mongoose.connection.close();
-//   }
-// };
-
-// seedDB();
-
-// file: scripts/seed.js
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import Product from '../app/models/products.models.js'; // Nhớ có đuôi .js

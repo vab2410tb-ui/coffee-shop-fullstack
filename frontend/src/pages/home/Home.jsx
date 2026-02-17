@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp,  } from '@fortawesome/free-solid-svg-icons';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons'
-import { SlideData, BeansData, AccData, ExploreData, BlogData } from '../../data/products.jsx'  
+import { SlideData, BeansData, AccData, ExploreData, BlogData } from '../../data/products.js'  
 import home from './home.module.scss'
 
 
@@ -16,8 +17,6 @@ function ProductPriceInfo() {
     //     setCurIndex(newSlide); 
     // };
 
-   
-    
     // Click DOT
     const moving = (index) => {
         if(autoMoving) return;
@@ -44,9 +43,6 @@ function ProductPriceInfo() {
         return () => clearTimeout(timer);
     }, [curIndex]);
     
-        
-    
-
     return (
         <>
         <div className={home.container} style={{'--current-index': curIndex}}>
@@ -82,6 +78,7 @@ function ProductPriceInfo() {
             {/* SECTION ONE */}
             <section className={`${home['introprd__section-1']}`}>
                 <div className={home.card}>
+                    <Link to='/shop/espresso-machine'>
                     <img 
                         src="https://res.cloudinary.com/drrao1nzd/image/upload/v1770301901/nab_coffee/products/main/cgzsdjzp9ghkuz612v0k.jpg" 
                         alt="CF at home"
@@ -91,6 +88,7 @@ function ProductPriceInfo() {
                     <span>
                         <FontAwesomeIcon icon={faArrowUp} />
                     </span>
+                    </Link>
                 </div>
 
                 <div>
@@ -137,8 +135,8 @@ function ProductPriceInfo() {
                         />
                         <span>NEW</span>
                     </div>
-                    <h3>Linea Micra</h3>
-                    <p>103.000.000 VND</p>
+                    <h3>Pico</h3>
+                    <p>27.000.000 VND</p>
                 </div>
                 <div>
                     <div className={home.wrapper}>
@@ -148,8 +146,8 @@ function ProductPriceInfo() {
                     />
                     <span>NEW</span>
                     </div>
-                    <h3>Linea Mini</h3>
-                    <p>130.000.000 VND</p>
+                    <h3>LEVA X 1 GROUP</h3>
+                    <p>282.900.000 VND</p>
                 </div>      
             </section>
 

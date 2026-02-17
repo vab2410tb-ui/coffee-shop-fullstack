@@ -4,7 +4,8 @@ import Footer from './components/Footer/Footer.jsx';
 import HomePage from './pages/home/Home.jsx';
 import ShopPage from './pages/shop/Shop.jsx';
 import ProductManagement from './pages/admin/ProductManagement.jsx'
-import CategoryPage from './pages/shop/categoryPage.jsx';
+import CategoryPage from './pages/shop/CategoryPage.jsx';
+
 function App() {
   
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/shop' element={<ShopPage/>}/>
           <Route path="/admin/products" element={<ProductManagement/>}/>
           <Route path='/shop/:slug' element={<CategoryPage/>}/>
+
         </Routes>
         <Footer/>
     </div>

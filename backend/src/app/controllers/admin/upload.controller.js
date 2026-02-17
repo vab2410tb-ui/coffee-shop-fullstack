@@ -3,7 +3,7 @@ import { v2 as cloudinary } from 'cloudinary';
 class UploadImg {
     async Upload(req, res) {
         try {
-            const { image, type } = req.body; // Giả sử frontend gửi thêm 'type' (main hoặc detail)
+            const { image, type } = req.body; 
 
             // Xác định folder dựa trên loại ảnh
             const targetFolder = type === 'detail' 
@@ -12,9 +12,8 @@ class UploadImg {
 
             const result = await cloudinary.uploader.upload(image, {
                 upload_preset: 'nab_coffee_upload',
-                folder: targetFolder, // 👈 Đây là cách tạo folder động
+                folder: targetFolder, 
                 allowed_formats: ['png', 'jpeg', 'jpg', 'svg', 'webp'],
-                // Đừng set public_id cố định nếu không muốn bị ghi đè ảnh cũ
             });
 
             // Trả về kết quả cho client
@@ -25,8 +24,8 @@ class UploadImg {
             });
 
         } catch (err) {
-            console.error("Lỗi upload:", err);
-            return res.status(500).json({ message: "Upload thất bại", error: err });
+            console.error("eror upload:", err);
+            return res.status(500).json({ message: "Upload fail", error: err });
         }
     }
 }

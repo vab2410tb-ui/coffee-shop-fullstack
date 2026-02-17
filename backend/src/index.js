@@ -4,7 +4,6 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import db from './config/db/index.js';
 import route from './routes/index.router.js';
-import cloudinary from './config/cloudinary/cloudinary.config.js';
 
 dotenv.config();
 
@@ -19,14 +18,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(cors());
 
-
-console.log(cloudinary)
 // Connect DB
 db()
 
 route(app);
-
-
 
 app.listen(port, () => {
   console.log(`App listening on port http://localhost:${port}`)

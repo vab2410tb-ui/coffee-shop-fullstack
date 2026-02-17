@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faUser, faCartShopping  } from '@fortawesome/free-solid-svg-icons';
-import ProductService from "../../service/ProductService.js"; 
+import ProductService from "../../service/productService.js"; 
 import AdminProductForm from "../../components/admin/AdminProductForm.jsx";
 import product_mgmt from './productmanagement.module.scss'
 
@@ -25,36 +25,43 @@ function ProductManagement() {
     { id: 'accessories', label: 'ACCESSORIES' },
   ];
 
-  // Hàm tải dữ liệu
+  // lấy danh sách sản phẩm từ server
   const fetchProducts = async () => {
     try {
-      // Gọi API với cả từ khóa và loại lọc
       const data = await ProductService.getAll(searchTerm, filterType, sortOrder);
       setProducts(data);
     } catch (err) {
-      console.error("Lỗi tải dữ liệu:", err);
+      console.error("Error loading data:", err);
     }
   };
 
-  // Tự động gọi lại API khi đổi bộ lọc hoặc nhập tìm kiếm
+  useEffect(() => {
+    if (editingId) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [editingId]);
+
+  // Tự động gọi lại API khi đổi bộ lọc || nhập tìm kiếm
   useEffect(() => {
     fetchProducts();
   }, [filterType, searchTerm, sortOrder]);
 
-  // Hàm xóa
+  // hàm xử lý xoá sản phẩm
   const handleDelete = async (id) => {
-    if (window.confirm("Bạn có chắc muốn xóa?")) {
-      try {
-        await ProductService.remove(id);
-        fetchProducts();
-      } catch (err) {
-        alert("Xóa thất bại!");
-      }
+  if (window.confirm("Are you sure you want to delete this product?")) {
+    try {
+      await ProductService.remove(id);
+      fetchProducts();
+    } catch (err) {
+      alert("Failed to delete the product. Please try again.");
     }
-  };
+  }
+};
 
   return (
     <div className={product_mgmt.container}>
+
+        {/* Mục Inventory Management*/}
         <h1>Inventory Management</h1>
         <div className={product_mgmt.form}>
          <AdminProductForm 
@@ -68,37 +75,36 @@ function ProductManagement() {
              </button>
          )}
       </div>
-      
 
-      
+      {/* Danh sách sản phẩm */}
       <div className={product_mgmt.table}>
-        <h3>PRODUCTS LIST </h3> 
+        <h3 style={{textAlign:'center', marginBottom: '40px'}}>Products List </h3> 
+
+        {/* Tab chọn category */}
         <div className={product_mgmt.line}></div>
+        <div className={product_mgmt.tab} >
+          {filters.map((f) => (
+            <button
+              key={f.id}
+              onClick={() => setFilterType(f.id)}
+              style={{
+                padding: '10px 20px',
+                border: 'none',
+                borderRadius: '10px',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                transition: '0.3s',
+                backgroundColor: filterType === f.id ? '#555555' : '#ecf0f1', 
+                color: filterType === f.id ? '#fff' : '#555555',
+                boxShadow: filterType === f.id ? '0 4px 6px rgba(0,0,0,0.1)' : 'none'
+              }}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
 
-         {/* TAB */}
-      <div className={product_mgmt.tab} >
-        {filters.map((f) => (
-          <button
-            key={f.id}
-            onClick={() => setFilterType(f.id)}
-            style={{
-              padding: '10px 20px',
-              border: 'none',
-              borderRadius: '10px',
-              cursor: 'pointer',
-              fontWeight: 'bold',
-              transition: '0.3s',
-              backgroundColor: filterType === f.id ? '#555555' : '#ecf0f1', 
-              color: filterType === f.id ? '#fff' : '#555555',
-              boxShadow: filterType === f.id ? '0 4px 6px rgba(0,0,0,0.1)' : 'none'
-            }}
-          >
-            {f.label}
-          </button>
-        ))}
-      </div>
-
-        {/* SEARCH */}
+        {/* Form search */}
       <div className={product_mgmt.srcbar}>
           <FontAwesomeIcon icon={faMagnifyingGlass} className={product_mgmt.icon} />
           <input 
@@ -109,7 +115,8 @@ function ProductManagement() {
               style={{ padding: '12px', width: '500px', border: '1px solid #ccc', borderRadius: '5px' }}
           />
       </div>
-
+      
+      {/* Lọc danh sách sản phẩm */}
       <div style={{ marginBottom: '15px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '10px' }}>
           <label style={{fontWeight: 'bold'}}>Sort By:</label>
           <select 
@@ -122,11 +129,8 @@ function ProductManagement() {
               <option value="price_desc">Price: High to Low</option>
           </select>
       </div>
-
- 
       
-
-
+      {/* Bảng danh sách sản phẩm */}
       <table border="1" style={{ width: '100%', borderCollapse: 'collapse', borderColor: '#ddd' }}>
         <thead style={{ background: '#f8f9fa' }}>
           <tr>
@@ -139,6 +143,7 @@ function ProductManagement() {
             <th style={{padding: '12px'}}>Action</th>
           </tr>
         </thead>
+        
         <tbody>
           {products.length === 0 ? (
              <tr><td colSpan="5" style={{padding: '20px', textAlign: 'center'}}>No products found.</td></tr>

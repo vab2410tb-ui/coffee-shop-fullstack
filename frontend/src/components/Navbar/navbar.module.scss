@@ -26,14 +26,97 @@
         display: flex;
         gap: 120px;
         list-style: none;
-    }
+        .header__link-shop {
+            display: inline-block;
+            position: relative;
+            color: inherit;
+            // Thêm cursor để người dùng biết bấm được
+            cursor: pointer; 
+            
+            // Style cho thẻ a chính
+            > a {
+                font-size: 20px;
+                font-weight: 500;
+                text-decoration: none;
+                color: inherit;
+                transition: color 0.2s ease;
+                padding-bottom: 10px;
+            }
 
+           
+            &:hover {
+                > a {
+                    color: #6c6c6c;
+                }
+
+                .link__shop-list {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                    pointer-events: auto;
+                }
+            }
+        }
+
+        .link__shop-list {
+            position: absolute;
+            top: 100%; 
+            left: 0;  
+            z-index: 10; 
+            width: max-content; 
+            margin-top: 20px; 
+            padding: 10px 20px;
+            background: #f2f2f2;
+            border-radius: 8px;
+            border: 1px solid #d3d3d3;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.15s ease;
+            pointer-events: none; 
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: -20px; 
+                left: 0;
+                width: 100%;
+                height: 20px;
+                background: transparent;
+            }
+
+            li {
+                list-style: none;
+                margin: 15px 0; 
+                
+                &:first-child { margin-top: 5px; }
+                &:last-child { margin-bottom: 5px; }
+
+                a {
+                    text-decoration: none;
+                    color: #6c6c6c;
+                    font-weight: 500;
+                    display: block; 
+                    transition: color 0.2s;
+
+                    &:hover {
+                        color: #000;
+                    }
+                }
+            }
+        }
+    }
     &__link {
         text-decoration: none;
         color: inherit;
         font-size: 20px;
         font-weight: 500;
+        &:hover {
+            color: #6c6c6c;
+        }
     }
+
 
     &__secondary-nav {
         ul {
@@ -41,9 +124,22 @@
             display: flex;
             gap: 35px;
         }
+        a {
+            text-decoration: none;
+        }
+        .icon {
+            font-size: 25px;
+        }
+        .iconWrapper {
+            color: #000;
+            position: relative;
+            .badge {
+                position: absolute;
+                top: -10px;
+                
+            }
+        }
+        
     }
     
-    .icon {
-        font-size: 25px;
-    }
 }
