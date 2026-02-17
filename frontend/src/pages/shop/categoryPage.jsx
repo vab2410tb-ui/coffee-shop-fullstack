@@ -55,7 +55,8 @@ const MenuPage = () => {
 
   return (
     <div className={category.container} >
-      {/*  DYNAMIC BANNER  */}
+
+      {/* ========== BEGIN: DYNAMIC BANNER ==========  */}
       <div className={category.banner}>
           <img
             src={categoryConfig[slug].banner}
@@ -63,9 +64,12 @@ const MenuPage = () => {
           />
           <h1>{categoryConfig[slug].label}</h1>
       </div>
+      {/* ========== END: DYNAMIC BANNER ==========  */}
+
       <div className={category.path}>
         <Link to="/">HOME</Link> / <Link to="/shop">SHOP</Link> / <p>{categoryConfig[slug].label}</p>
       </div>
+
       {/* Sort */}
       <div className={category.sort} >
           <label style={{fontWeight: 'bold', fontSize: '24px', marginRight: '10px'}}>Sort by:</label>
@@ -79,7 +83,8 @@ const MenuPage = () => {
               <option value="price_desc">Price: High to Low</option>
           </select>
       </div>
-      {/*  PRODUCT LIST  */}
+      
+      {/* ========== BEGIN: PRODUCT LIST ==========  */}
       <div className={category.productslist}>
         {loading ? (
           <p>Loading...</p>
@@ -107,6 +112,7 @@ const MenuPage = () => {
           <p>No products found.</p>
         )}
       </div>
+      {/* ========== END: PRODUCT LIST ==========  */}
     </div>
   );
 };
