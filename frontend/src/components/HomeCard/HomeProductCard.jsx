@@ -10,19 +10,19 @@ const ProductItem = ({ product, home }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const currentStock = product.stock
+  const currentStock = product.stock ?? product.variants?.[0]?.stock ?? 0;
 
   const itemInCart = cart.find((item) => item._id === product._id);
   const curQtyInCart = itemInCart ? itemInCart.quantity : 0;
 
-  const isOutOfStock = product.stock === 0;
-  const isMaxedOut = curQtyInCart >= currentStock;
+  const isSoldOut = currentStock <= 0;
+  const isMaxedOut = !isSoldOut && (curQtyInCart >= currentStock);
     
 
   const handleAddToCart = async () => {
     setIsAdding(true);
     await new Promise((resolve) => setTimeout(resolve, 800));
-    const defaultVariant = product.variants?.[0] || { color: "", colorCode: "", stock: 0, images: [] };
+    const defaultVariant = product.variants?.[0] || { color: "", colorCode: "", stock: "", images: [] };
     dispatch({ 
       type: "Add", 
       product: product,
@@ -34,20 +34,28 @@ const ProductItem = ({ product, home }) => {
     setTimeout(() => setIsSuccess(false), 2000);
   };
 
-  const isDisabled = isOutOfStock || isMaxedOut || isAdding;
+  const isDisabled = isSoldOut || isMaxedOut || isAdding;
 
   return (
     <div key={product._id}>
       <div className={`${home.wrapper} ${isDisabled ? home.disabledWrapper : ""}`}>
-        {isOutOfStock && <span className={home.outOfStockLabel}>Sold out</span>}
+        {isSoldOut && <span className={home.isSoldOutLabel}>Sold out</span>}
         <button
           className={`${home.btn} ${isSuccess ? home.btnSuccess : ""}`}
           onClick={handleAddToCart}
           disabled={isDisabled}
         >
-       {isAdding ? (<Loading />) : isSuccess ? (<> Added <FontAwesomeIcon icon={faCheck} /></>): isOutOfStock ? (
-                   "OUT OF STOCK") : isMaxedOut ? (
-                   "SOLD OUT" ) : (<>ADD TO CART</>)}
+       {isAdding ? (
+          <Loading />
+        ) : isSuccess ? (
+          <> Added <FontAwesomeIcon icon={faCheck} /></>
+        ) : isSoldOut ? (
+          "SOLD OUT"
+        ) : isMaxedOut ? (
+          "MAX IN CART" 
+        ) : (
+          <>ADD TO CART</>
+        )}
         </button>
       <Link to={`/products/${product.sku}`}>
         <img src={product.mainImage} alt={product.title} />

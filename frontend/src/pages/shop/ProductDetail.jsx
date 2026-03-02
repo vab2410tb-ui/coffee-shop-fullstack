@@ -162,7 +162,7 @@ const ProductDetailPage = () => {
                         <path d="M13 8C13 10.7614 10.7614 13 8 13C5.23858 13 3 10.7614 3 8C3 5.23858 5.23858 3 8 3C10.7614 3 13 5.23858 13 8Z" fill="#F42D2D"
                         />
                         </svg>
-                        <p>Out of stock</p>
+                        <p>Sold out</p>
                     </div>
                     )}
                 </div>
@@ -212,18 +212,9 @@ const ProductDetailPage = () => {
                         whiteSpace: 'nowrap'
                     }}
                     >
-                    {isAdding ? (
-                        <Loading />
-                    ) : isSuccess ? (
-                        <>
-                        {" "}
-                        Added <FontAwesomeIcon icon={faCheck} />
-                        </>
-                    ) : isMaxedOut ? (
-                        "OUT OF STOCK"
-                    ) : (
-                        "ADD TO CART"
-                    )}
+                    {isAdding ? (<Loading />) : isSuccess ? (<> Added <FontAwesomeIcon icon={faCheck} /></>): isOutOfStock ? (
+                                       "SOLD OUT") : isMaxedOut ? (
+                                       "MAX IN CART" ) : (<>ADD TO CART</>)}
                     </button>
                 </div>
 

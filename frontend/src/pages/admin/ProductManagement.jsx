@@ -1,5 +1,5 @@
 // src/pages/admin/ProductManagement.jsx
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import ProductService from "../../service/productService.js"; 
@@ -10,13 +10,9 @@ function ProductManagement() {
   const [products, setProducts] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [sortOrder, setSortOrder] = useState("default");
-  
-  // State: Find key word
   const [searchTerm, setSearchTerm] = useState("");
-  // State: Loại lọc (Mặc định là 'all')
   const [filterType, setFilterType] = useState("all");
 
-  // Danh sách các bộ lọc
   const filters = [
     { id: 'all', label: 'ALL' },
     { id: 'espresso-machine', label: 'ESSPRESSO MACHINE' },
@@ -46,12 +42,10 @@ function ProductManagement() {
     }
   }, [editingId]);
 
-  // Tự động gọi lại API khi đổi bộ lọc || nhập tìm kiếm
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
-  // hàm xử lý xoá sản phẩm
   const handleDelete = async (id) => {
   if (window.confirm("Are you sure you want to delete this product?")) {
     try {

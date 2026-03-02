@@ -1,20 +1,50 @@
-import {Link} from "react-router-dom"
-import { useContext} from "react";
+import { Link } from "react-router-dom"
+import { useContext, useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faUser, faCartShopping, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faUser, faCartShopping, faChevronDown, faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from "../../features/ContextProvider";
+import ProductService from "../../service/productService";
 import header from "./navbar.module.scss"
 
 
-function Heading () {
+const Heading =  () => {
+    const [searchTerm, setSearchTerm] = useState("");
+    const [products, setProducts] = useState("")
     const { toggleCart, cart } = useContext(CartContext);
+    
     const totalItems = cart.reduce(
         (sum, item) => sum + item.quantity, 0
     );
+
+    const userInfoString = localStorage.getItem('userInfo');
+    const userInfo = userInfoString ? JSON.parse(userInfoString) : null;
+
+    // Xử lý khi bấm Đăng xuất
+    const handleLogout = () => {
+        localStorage.removeItem('userInfo');
+        window.location.href = '/'; 
+    };
+
+    useEffect(() => {
+    const fetchProducts = async () => {
+        try {
+            const data = await ProductService.getAll(searchTerm);
+            setProducts(data);
+        } catch (err) {
+            console.error("Fetch products failed:", err);
+        }
+    };
+
+    fetchProducts();
+}, [searchTerm]);
+
+
     return (
         <div className={header.header}>
             <div className={header.header__logo}>
-                <img src="/icon/image.png" alt="" />
+                <Link to="/" className={header.header__link}>
+                    <img src="/icon/image.png" alt="NabCoffeeShop" />
+                </Link>
             </div>
             <div className={`${header['header__main-nav']}`}>
                 <ul className={header.header__list}>
@@ -49,21 +79,81 @@ function Heading () {
                     
                 </ul>
             </div>
-            <div className={`${header['header__secondary-nav']}`}>
-                <ul>
-                    <li><FontAwesomeIcon icon={faUser} className={header.icon} /></li>
-                    <li><FontAwesomeIcon icon={faMagnifyingGlass} className={header.icon} /></li>
-                    <li>
-                        <div className={header.iconWrapper} onClick={() => toggleCart(true)}>
-                            <FontAwesomeIcon icon={faCartShopping} className={header.icon} />
-                            <span className={header.badge}>{totalItems}</span>
-                        </div>
-
-                    </li>
+            {userInfo ? (
+                <div className={`${header['header__secondary-nav']}`}>
+                    <ul>
+                        <li className={header.userMenu}>
+                                <Link to='/profile' >
+                                    <FontAwesomeIcon icon={faUser} className={header.iconUser} />
+                                    <FontAwesomeIcon icon={faChevronDown}/>
+                                </Link>
+                                <ul className={header.iconUser_list}>
+                                    <li  style={{display: 'flex', alignItems: 'center', gap: '10px', borderBottom: '1px solid', paddingBottom: '20px'}}>
+                                        <span><FontAwesomeIcon icon={faCircleUser} style={{fontSize:'32px'}}/></span>
+                                        <div style={{display: 'flex',flexDirection: 'column', gap: '10px', color: '#222222'}}>
+                                            <p>{userInfo.name}</p>
+                                            <p>{userInfo.email}</p>
+                                        </div>
+                                        
+                                    </li>
+                                    <div style={{display: 'flex', flexDirection: 'column', gap: '30px', marginTop: '40px'}} className={header.userSetting}>
+                                        <Link to='/profile'>
+                                            <p style={{ color: '#000', fontWeight: '300'}}>Profile</p>
+                                        </Link>
+                                        <p style={{ color: '#000', fontWeight: '300'}}>Orders</p>
+                                        <p 
+                                            onClick={handleLogout}
+                                            style={{ textAlign: 'left', color: '#000', border: 'none', cursor: 'pointer', fontWeight: '300', marginBottom: '20px' }}
+                                        >
+                                            Log out
+                                        </p>     
+                                    </div>
+                                </ul>
+                            </li>
+                   
                         
-                </ul>
-                
-            </div>
+                        <li><FontAwesomeIcon icon={faMagnifyingGlass} className={header.icon} /></li>
+
+                        <li>
+                            <div className={header.iconWrapper} onClick={() => toggleCart(true)}>
+                                <FontAwesomeIcon icon={faCartShopping} className={header.icon} />
+                                <span className={header.badge}>{totalItems}</span>
+                            </div>
+                        </li>   
+                    </ul>               
+                </div>
+            ) : (
+                <div className={`${header['header__secondary-nav']}`}>
+                    <ul>
+                        {/* Profile User */}
+                            <li className={header.userMenu}>
+                                <Link to='/profile' >
+                                    <FontAwesomeIcon icon={faUser} className={header.iconUser} />
+                                    <FontAwesomeIcon icon={faChevronDown}/>
+                                </Link>
+                                <ul className={header.iconUser_list}>
+                                    <li  style={{display: 'flex', alignItems: 'center', gap: '15px'}}>
+                                        <span><FontAwesomeIcon icon={faCircleUser} style={{fontSize:'32px'}}/></span>
+                                        <h4><Link to="/authentic/login">Log in</Link></h4>    
+                                    </li>
+                                </ul>
+                            </li>
+                   
+
+                        {/* Find product */}
+                        <li><FontAwesomeIcon icon={faMagnifyingGlass} className={header.icon} /></li>
+
+                        {/* Cart product */}
+                        <li>
+                            <div className={header.iconWrapper} onClick={() => toggleCart(true)}>
+                                <FontAwesomeIcon icon={faCartShopping} className={header.icon} />
+                                <span className={header.badge}>{totalItems}</span>
+                            </div>
+                        </li>  
+
+                    </ul>               
+                </div>
+            )}
             
         </div>
     );

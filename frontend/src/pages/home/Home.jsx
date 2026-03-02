@@ -220,8 +220,8 @@ function Home() {
                 <h2>COFFEE BEANS</h2>
                 <div className={home.cardbeans} >
                     {accessories.map((product, index) => (
-                       <div key={product._id}>
-                    <HomeProductCard product={product} home={home} dispatch={dispatch} />
+                       <div key={index}>
+                    <HomeProductCard key={product._id} product={product} home={home} dispatch={dispatch} />
                 </div>
                     ))}
                 </div>

@@ -5,11 +5,12 @@ import App from "./App";
 import './styles/global.scss'
 import reportWebVitals from "./reportWebVitals";
 import ContextPorvider from "./features/ContextProvider";
-
+import ScrollRestoration from "./components/Scroll";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      <ScrollRestoration />
       <ContextPorvider>
         <App />
       </ContextPorvider>

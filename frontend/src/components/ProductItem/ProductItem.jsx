@@ -71,7 +71,7 @@ const ProductItem = ({ product, category }) => {
           ) : isOutOfStock ? (
             "SOLD OUT"
           ) : isMaxedOut ? (
-            "OUT OF STOCK"
+            "MAX IN CART"
           ) : (
             "ADD TO CART"
           )}
