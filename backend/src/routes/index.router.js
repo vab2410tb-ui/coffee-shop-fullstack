@@ -4,9 +4,11 @@ import siteRouter from './site.router.js';
 import adminRouter from './admin/upload.route.js'
 import productAdminRouter from './admin/product.route.js';
 import authenticRouter from './auth.route.js'
+import orderRouter from './order.route.js'
 
 
 const route = (app) => {
+   app.use('/api/v1/orders', orderRouter)
    app.use('/api/v1/authentication', authenticRouter)
    app.use('/api/v1/products', shopRouter)
    app.use('/api/v1/admin/uploads', adminRouter)

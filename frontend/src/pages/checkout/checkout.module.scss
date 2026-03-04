@@ -1,0 +1,116 @@
+.user {
+    padding-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+
+.checkout_container {
+    margin-inline: 400px;
+    .checkout_layout {
+        display: flex;
+        justify-content: space-between;
+    }
+
+}
+.shipping_form{
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 503px;
+        gap: 20px;
+        div {
+            display: flex;
+            flex-direction: column;
+            
+            
+            input, textarea{
+                padding: 10px 20px;
+                border-radius: 10px;
+                border: 1px solid #3333331f; 
+                
+            }
+        }
+    }
+}
+
+.payment_container {
+  border: 1px solid #3333331f;
+  border-radius: 15px;
+  overflow: hidden; 
+   margin-bottom: 20px;
+  .payment_label{
+    display: flex;
+    align-items: center;
+    gap: 10px; // khoảng cách giữa radio và text
+    cursor: pointer;
+    padding: 15px;
+  }
+}
+
+.payment_item {
+  border-bottom: 1px solid #3333331f;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+.payment_content {
+    background-color: #f4f4f4;
+    width: 100%;
+    text-align: center;
+    // padding: 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    &.show {
+        max-height: 800px;
+        padding: 15px;
+    }
+    p{
+        margin: 0;
+    }
+}
+.checkout_btn {
+    margin-bottom: 100px;
+    padding: 10px 0;
+    border-radius: 15px;
+    background-color: #0063b1;
+    opacity: 0.5;
+    color: #fff;
+    border: none;
+    &:hover{
+        background-color: #0063b1;
+        opacity: 1;
+    }
+}
+
+.order_summary {
+    .total{
+        display: flex;
+        justify-content: space-between;
+        font-size: 19px;
+    }
+    .ordercart {
+        display: flex;
+        gap: 12px;
+        width: 100%;
+        margin-bottom: 15px;
+
+        p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        span {
+            margin-left: auto; 
+            font-weight: 500;
+            font-size: 14px;
+        }
+    }
+}

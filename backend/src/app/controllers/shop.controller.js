@@ -1,4 +1,4 @@
-import Products from "../models/products.models.js";
+import Products from "../models/products.model.js";
 
 const shopController = {
     

@@ -1,91 +1,94 @@
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); 
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    z-index: 9999; 
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
 }
 
 .modal {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    width: 400px;
-    max-width: 90%; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
-    z-index: 999;
-    transform: translateY(20px) scale(0.95);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .show {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 
-    .modal {
-        transform: translateY(0) scale(1);
-    }
+  .modal {
+    transform: translateY(0) scale(1);
+  }
 }
 
 .formContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; 
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .inputGroup {
-    position: relative; 
+  position: relative;
+  width: 100%;
+
+  input,
+  textarea {
     width: 100%;
-
-    input, textarea {
-        width: 100%;
-        padding: 12px 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        outline: none;
-        font-size: 14px;
-        background: transparent;
-        transition: border-color 0.2s;
-        &:focus {
-            border-color: #333; 
-        }
+    padding: 12px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+    transition: border-color 0.2s;
+    &:focus {
+      border-color: #333;
     }
+  }
 
-    label {
-        position: absolute;
-        left: 10px;
-        top: -10px; 
-        background-color: #fff;
-        padding: 0 5px;
-        font-size: 13px;
-        color: #666;
-        pointer-events: none;
-        font-weight: 500;
-        transition: all 0.2s ease;
-    }
+  label {
+    position: absolute;
+    left: 10px;
+    top: -10px;
+    background-color: #fff;
+    padding: 0 5px;
+    font-size: 13px;
+    color: #666;
+    pointer-events: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
 
-    input:focus + label, 
-    textarea:focus + label {
-        color: #000;
-        font-weight: bold;
-    }
+  input:focus + label,
+  textarea:focus + label {
+    color: #000;
+    font-weight: bold;
+  }
 }
 
 .btn {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    button {
-        padding: 10px;
-        border-radius: 10px;
-        border: 1px solid #272727;
-    }
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  button {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #272727;
+  }
 }

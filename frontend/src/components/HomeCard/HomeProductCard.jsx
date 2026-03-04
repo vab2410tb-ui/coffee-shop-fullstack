@@ -1,12 +1,12 @@
-import { useContext, useState } from "react";
-import { Link } from 'react-router-dom'
-import Loading from "../../components/Loading/Loading.jsx";
+import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Loading from '../../components/Loading/Loading.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { CartContext } from "../../features/ContextProvider.jsx";
+import { CartContext } from '../../features/ContextProvider.jsx';
 
 const ProductItem = ({ product, home }) => {
-  const {cart, dispatch} = useContext(CartContext)
+  const { cart, dispatch } = useContext(CartContext);
   const [isAdding, setIsAdding] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -16,18 +16,22 @@ const ProductItem = ({ product, home }) => {
   const curQtyInCart = itemInCart ? itemInCart.quantity : 0;
 
   const isSoldOut = currentStock <= 0;
-  const isMaxedOut = !isSoldOut && (curQtyInCart >= currentStock);
-    
+  const isMaxedOut = !isSoldOut && curQtyInCart >= currentStock;
 
   const handleAddToCart = async () => {
     setIsAdding(true);
     await new Promise((resolve) => setTimeout(resolve, 800));
-    const defaultVariant = product.variants?.[0] || { color: "", colorCode: "", stock: "", images: [] };
-    dispatch({ 
-      type: "Add", 
+    const defaultVariant = product.variants?.[0] || {
+      color: '',
+      colorCode: '',
+      stock: '',
+      images: [],
+    };
+    dispatch({
+      type: 'Add',
       product: product,
       variant: defaultVariant,
-      quantity: 1  
+      quantity: 1,
     });
     setIsAdding(false);
     setIsSuccess(true);
@@ -38,35 +42,38 @@ const ProductItem = ({ product, home }) => {
 
   return (
     <div key={product._id}>
-      <div className={`${home.wrapper} ${isDisabled ? home.disabledWrapper : ""}`}>
+      <div className={`${home.wrapper} ${isDisabled ? home.disabledWrapper : ''}`}>
         {isSoldOut && <span className={home.isSoldOutLabel}>Sold out</span>}
         <button
-          className={`${home.btn} ${isSuccess ? home.btnSuccess : ""}`}
+          className={`${home.btn} ${isSuccess ? home.btnSuccess : ''}`}
           onClick={handleAddToCart}
           disabled={isDisabled}
         >
-       {isAdding ? (
-          <Loading />
-        ) : isSuccess ? (
-          <> Added <FontAwesomeIcon icon={faCheck} /></>
-        ) : isSoldOut ? (
-          "SOLD OUT"
-        ) : isMaxedOut ? (
-          "MAX IN CART" 
-        ) : (
-          <>ADD TO CART</>
-        )}
+          {isAdding ? (
+            <Loading />
+          ) : isSuccess ? (
+            <>
+              {' '}
+              Added <FontAwesomeIcon icon={faCheck} />
+            </>
+          ) : isSoldOut ? (
+            'SOLD OUT'
+          ) : isMaxedOut ? (
+            'MAX IN CART'
+          ) : (
+            <>ADD TO CART</>
+          )}
         </button>
-      <Link to={`/products/${product.sku}`}>
-        <img src={product.mainImage} alt={product.title} />
-      </Link>
+        <Link to={`/products/${product.sku}`}>
+          <img src={product.mainImage} alt={product.title} />
+        </Link>
       </div>
       <h3>{product.name}</h3>
-      <p style={{marginBottom:'50px'}}> 
-        {new Intl.NumberFormat("vi-VN", {
-          style: "currency",
-          currency: "VND",
-          currencyDisplay: "code",
+      <p style={{ marginBottom: '50px' }}>
+        {new Intl.NumberFormat('vi-VN', {
+          style: 'currency',
+          currency: 'VND',
+          currencyDisplay: 'code',
         }).format(product.price)}
       </p>
     </div>

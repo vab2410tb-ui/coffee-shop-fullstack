@@ -1,4 +1,4 @@
-import User from '../models/user.modals.js';
+import User from '../models/user.modal.js';
 import nodemailer from 'nodemailer';
 import jwt from 'jsonwebtoken';
 
@@ -49,7 +49,7 @@ export const verifyOTP = async (req, res) => {
     try {
         const { email, otp } = req.body;
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email: email });
 
         // Kiểm tra user có tồn tại và mã OTP có khớp không
         if (!user || user.otp !== otp) {

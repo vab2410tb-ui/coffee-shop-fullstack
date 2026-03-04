@@ -1,0 +1,190 @@
+.container {
+  padding-top: 102px;
+  margin-inline: 300px;
+  max-width: 1200px;
+  min-height: 100vh;
+  display: block;
+  overflow: visible;
+  margin-bottom: 50px;
+
+  h1 {
+    padding-top: 50px;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+}
+
+.order {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  align-items: start;
+  margin-bottom: 100px;
+  gap: 70px;
+  .form {
+    position: sticky;
+    top: 120px;
+    height: fit-content;
+    z-index: 10;
+    border: 1px solid #3333331f;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 46px 48px;
+    .ordernote {
+      position: relative;
+      width: 100%;
+      textarea {
+        width: 100%;
+        padding: 24px 20px 8px;
+        border: 1px solid #3333331f;
+        border-radius: 12px;
+        height: 100px;
+        &:focus {
+          border-color: #000;
+        }
+      }
+      label {
+        position: absolute;
+        left: 20px;
+        top: 16px;
+        opacity: 0.5;
+        transition: all 0.2s ease;
+        pointer-events: none;
+        font-size: 15px;
+      }
+      textarea:focus + label,
+      textarea:not(:placeholder-shown) + label {
+        top: 5px;
+        font-size: 12px;
+        opacity: 1;
+        color: #000;
+      }
+    }
+    button {
+      padding: 18px 0;
+      background-color: #000;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 20px;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    tbody {
+      tr:first-child td {
+        padding: 32px 16px 24px 0;
+        &:nth-child(2) {
+          padding: 32px 16px 24px;
+        }
+        &:nth-child(3) {
+          padding: 32px 0 24px 16px;
+        }
+      }
+
+      tr:not(:first-child) td {
+        padding: 0 16px 24px 0;
+        &:nth-child(2) {
+          padding: 0 16px 24px;
+        }
+        &:nth-child(3) {
+          padding: 0 0 24px 16px;
+        }
+      }
+    }
+  }
+}
+
+.section {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+
+  &_1 {
+    h1 {
+      text-align: left;
+    }
+
+    .block {
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: #f4f4f4;
+        width: 100%;
+        border-radius: 15px;
+        padding: 35px 10px 35px 15px;
+      }
+    }
+  }
+
+  .accordion_container {
+  background-color: #f4f4f4;
+  border-radius: 20px;
+  overflow: hidden; 
+  margin-inline: 50px; 
+}
+
+.accordion_item {
+  margin-inline: 20px; 
+  border-bottom: 1px solid #3333331f;
+  &:last-child {
+    border-bottom: none !important;
+  }
+}
+
+.accordion_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0; 
+  cursor: pointer;
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+.icon {
+  transition: transform 0.3s ease;
+  &.rotate {
+    transform: rotate(180deg);
+  }
+}
+
+.accordion_content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out;
+  
+  &.show {
+    max-height: 500px;
+  }
+}
+
+.accordion_inner {
+  padding-bottom: 25px;
+  ul {
+    padding-left: 20px;
+    li {
+      margin-top: 10px;
+      color: #555;
+    }
+  }
+}
+  
+}

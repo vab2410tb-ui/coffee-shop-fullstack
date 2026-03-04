@@ -1,26 +1,25 @@
 const CartReducer = (state, action) => {
-
-  console.log("🔥 Hành động đang gọi:", action.type);
-  console.log("📦 Dữ liệu truyền lên (payload):", action);
+  console.log('🔥 Hành động đang gọi:', action.type);
+  console.log('📦 Dữ liệu truyền lên (payload):', action);
   // Destructuring action
   const { type, product, variant, id, colorCode } = action;
 
   switch (type) {
-    case "Add":
+    case 'Add':
       // Tìm xem sản phẩm cùng màu này đã có trong giỏ chưa
       const existingItem = state.find(
-        (item) => item._id === product._id && item.colorCode === variant.colorCode
+        (item) => item._id === product._id && item.colorCode === variant.colorCode,
       );
       const quantityToAdd = action.quantity || 1;
       if (existingItem) {
         return state.map((item) =>
           item._id === product._id && item.colorCode === variant.colorCode
-            ? { 
-                ...item, 
+            ? {
+                ...item,
                 // Không cho phép vượt quá số lượng tồn kho (stock) của variant đó
-                quantity: Math.min(item.quantity + quantityToAdd, variant.stock) 
+                quantity: Math.min(item.quantity + quantityToAdd, variant.stock),
               }
-            : item
+            : item,
         );
       }
 
@@ -31,33 +30,33 @@ const CartReducer = (state, action) => {
           _id: product._id,
           name: product.name,
           price: product.price,
-          image: variant.images[0] || product.mainImage, 
+          image: variant.images[0] || product.mainImage,
           color: variant.color,
           colorCode: variant.colorCode,
-          stock: variant.stock, 
+          stock: variant.stock,
           quantity: quantityToAdd,
         },
       ];
 
-    case "Remove":
+    case 'Remove':
+      return state.filter((item) => !(item._id === id && item.colorCode === colorCode));
 
-      return state.filter(
-        (item) => !(item._id === id && item.colorCode === colorCode)
-      );
-
-    case "Increase":
+    case 'Increase':
       return state.map((item) =>
         item._id === id && item.colorCode === colorCode
           ? { ...item, quantity: Math.min(item.quantity + 1, item.stock) }
-          : item
+          : item,
       );
 
-    case "Decrease":
+    case 'Decrease':
       return state.map((item) =>
         item._id === id && item.colorCode === colorCode
           ? { ...item, quantity: Math.max(item.quantity - 1, 1) }
-          : item
+          : item,
       );
+
+    case 'CLEAR_CART':
+            return [];
 
     default:
       return state;

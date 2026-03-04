@@ -1,20 +1,34 @@
-import styles from "./policy.module.scss";
-
+import styles from './policy.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 const PolicyModal = ({ policy, onClose, isOpen }) => {
   return (
-    <div className={`${styles.overlay} ${isOpen ? styles.show : ""}`} onClick={onClose}>
+    <div className={`${styles.overlay} ${isOpen ? styles.show : ''}`} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        {/* Chỉ render nội dung nếu policy tồn tại để tránh lỗi crash */}
         {policy && (
           <>
-            <h3>{policy.title}</h3>
-            <div className={styles.content}>{policy.content}</div>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '30px',
+              }}
+            >
+              <h3 style={{ fontSize: '21px' }}>{policy.title}</h3>
+              <button
+                onClick={onClose}
+                style={{ border: 'none', backgroundColor: '#fff', cursor: 'pointer' }}
+              >
+                <FontAwesomeIcon icon={faXmark} />
+              </button>
+            </div>
+            <p style={{ fontSize: '14px' }}>{policy.content}</p>
           </>
         )}
-        <button onClick={onClose}>Đóng</button>
       </div>
     </div>
   );
-}
+};
 
-export default PolicyModal
+export default PolicyModal;

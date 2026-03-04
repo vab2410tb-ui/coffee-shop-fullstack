@@ -1,35 +1,36 @@
-import { useState, useEffect, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState, useEffect, useContext } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { CartContext } from '../../features/ContextProvider.jsx';
-import productService from "../../service/productService";
+import productService from '../../service/productService';
 import category from './categorypage.module.scss';
-import ProductItem from "../../components/ProductItem/ProductItem.jsx";
+import ProductItem from '../../components/ProductItem/ProductItem.jsx';
 
 const categoryConfig = {
-  "espresso-machine": {
-    label: "Espresso Machine",
-    banner: "https://res.cloudinary.com/drrao1nzd/image/upload/v1771074757/BannerShopEM_eexbd2.jpg", 
+  'espresso-machine': {
+    label: 'Espresso Machine',
+    banner: 'https://res.cloudinary.com/drrao1nzd/image/upload/v1771074757/BannerShopEM_eexbd2.jpg',
   },
-  "coffee-beans": {
-    label: "Beans Coffee", 
-    banner: "https://res.cloudinary.com/drrao1nzd/image/upload/v1771076026/BannerShopCB_kpmqzx.jpg",
+  'coffee-beans': {
+    label: 'Beans Coffee',
+    banner: 'https://res.cloudinary.com/drrao1nzd/image/upload/v1771076026/BannerShopCB_kpmqzx.jpg',
   },
-  "accessories": {
-    label: "Accessories",
-    banner: "https://res.cloudinary.com/drrao1nzd/image/upload/v1771075516/BannerShopACC_d25xkd.jpg",
+  accessories: {
+    label: 'Accessories',
+    banner:
+      'https://res.cloudinary.com/drrao1nzd/image/upload/v1771075516/BannerShopACC_d25xkd.jpg',
   },
-  "grinder-machine": {
-    label: "Grinder Machine",
-    banner: "https://res.cloudinary.com/drrao1nzd/image/upload/v1771076023/BannerShopGM_e0ypkt.jpg",
+  'grinder-machine': {
+    label: 'Grinder Machine',
+    banner: 'https://res.cloudinary.com/drrao1nzd/image/upload/v1771076023/BannerShopGM_e0ypkt.jpg',
   },
 };
 
 const CategoryPage = () => {
   const { slug } = useParams();
   const { dispatch } = useContext(CartContext);
-  const [sortOrder, setSortOrder] = useState("default");
+  const [sortOrder, setSortOrder] = useState('default');
   const [products, setProducts] = useState([]);
-  const [pageLoading, setPageLoading] = useState(false); 
+  const [pageLoading, setPageLoading] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -38,7 +39,7 @@ const CategoryPage = () => {
         const res = await productService.getProductsByCategory(slug, sortOrder);
         setProducts(res.data);
       } catch (error) {
-        console.error("Error loading product:", error);
+        console.error('Error loading product:', error);
       }
       setPageLoading(false);
     };
@@ -47,7 +48,7 @@ const CategoryPage = () => {
   }, [slug, sortOrder]);
 
   // Kiểm tra config để tránh lỗi khi slug không tồn tại
-  const currentCategory = categoryConfig[slug] || { label: "Category", banner: "" };
+  const currentCategory = categoryConfig[slug] || { label: 'Category', banner: '' };
 
   return (
     <div className={category.container}>
@@ -61,8 +62,10 @@ const CategoryPage = () => {
       </div>
 
       <div className={category.sort}>
-        <label style={{ fontWeight: 'bold', fontSize: '24px', marginRight: '10px' }}>Sort by:</label>
-        <select 
+        <label style={{ fontWeight: 'bold', fontSize: '24px', marginRight: '10px' }}>
+          Sort by:
+        </label>
+        <select
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value)}
           style={{ padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
@@ -78,11 +81,11 @@ const CategoryPage = () => {
           <p>Loading products...</p>
         ) : products?.length > 0 ? (
           products.map((product) => (
-            <ProductItem 
-              key={product._id} 
-              product={product} 
-              dispatch={dispatch} 
-              category={category} 
+            <ProductItem
+              key={product._id}
+              product={product}
+              dispatch={dispatch}
+              category={category}
             />
           ))
         ) : (

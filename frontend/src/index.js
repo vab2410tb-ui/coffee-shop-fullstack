@@ -1,19 +1,23 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import './styles/global.scss'
-import reportWebVitals from "./reportWebVitals";
-import ContextPorvider from "./features/ContextProvider";
-import ScrollRestoration from "./components/Scroll";
-const root = ReactDOM.createRoot(document.getElementById("root"));
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './features/AuthContext';
+import reportWebVitals from './reportWebVitals';
+import ContextPorvider from './features/ContextProvider';
+import ScrollRestoration from './components/Scroll';
+import App from './App';
+import './styles/global.scss';
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ScrollRestoration />
+      <AuthProvider>
       <ContextPorvider>
         <App />
       </ContextPorvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );

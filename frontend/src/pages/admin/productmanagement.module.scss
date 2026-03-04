@@ -1,77 +1,68 @@
-
-
 .container {
-    background-color: #f2f2f2;
-    padding-bottom: 100px;
-    margin-top: 102px;
-    
+  background-color: #f2f2f2;
+  padding-bottom: 100px;
+  margin-top: 102px;
 
-    h1{
-        padding: 30px 0 0 0px;
-        font-size: 40px;
-        margin-inline: 100px;
+  h1 {
+    padding: 30px 0 0 0px;
+    font-size: 40px;
+    margin-inline: 100px;
+  }
+
+  .form {
+    background-color: #fff;
+    margin-inline: 100px;
+    margin-bottom: 80px;
+    padding-bottom: 50px;
+
+    .btn_edit {
+      margin: 0 0 50px 80px;
+      font-size: 22px;
+      padding: 10px 30px 10px 30px;
+      border-radius: 10px;
+      background-color: #cfcfcf;
+      color: #000;
+      border: none;
+      &:hover {
+        color: #fff;
+        background: rgba(3, 3, 3, 0.25);
+        backdrop-filter: brightness(0.4);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .table {
+    margin-inline: 100px;
+    background-color: #fff;
+
+    .line {
+      margin-top: 20px;
+      width: 100%;
+      border-bottom: 2px solid #acacac;
     }
 
-    .form {
-        background-color: #fff;
-        margin-inline: 100px;
-        margin-bottom: 80px;
-        padding-bottom: 50px;
-
-        .btn_edit {
-            margin: 0 0 50px 80px;
-            font-size: 22px;
-            padding: 10px 30px 10px 30px;
-            border-radius: 10px;
-            background-color:#cfcfcf;
-            color: #000;
-            border: none;
-            &:hover {
-                color: #fff;
-                background: rgba(3, 3, 3, 0.25);
-                backdrop-filter: brightness(0.4);
-                cursor: pointer;
-            }
-        }  
+    h3 {
+      font-size: 32px;
+      padding: 20px 0 0 20px;
+      color: #6c6c6c;
     }
-
-    .table {
-        margin-inline: 100px;
-        background-color: #fff;
-        
-        .line {
-           margin-top: 20px;
-            width: 100%;
-            border-bottom: 2px solid #acacac;
-        }
-        
-        h3 {
-            font-size: 32px;
-            padding: 20px 0 0 20px;
-            color: #6c6c6c;
-
-        }
-        .tab {
-            margin: 20px 0 0 80px;
-            display: flex;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        .srcbar {
-            position: relative;
-            margin: 20px 0 40px 80px;
-            .icon {
-                font-size: 20px;
-                position: absolute;
-                top: 10px;
-                left: 450px;
-                cursor: pointer;
-                
-            }
-
-        }
+    .tab {
+      margin: 20px 0 0 80px;
+      display: flex;
+      gap: 40px;
+      margin-bottom: 40px;
     }
-    
-
-
+    .srcbar {
+      position: relative;
+      margin: 20px 0 40px 80px;
+      .icon {
+        font-size: 20px;
+        position: absolute;
+        top: 10px;
+        left: 450px;
+        cursor: pointer;
+      }
+    }
+  }
 }

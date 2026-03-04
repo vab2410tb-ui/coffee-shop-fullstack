@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = "http://localhost:8000/api/v1/admin/uploads";
+const API_URL = 'http://localhost:8000/api/v1/admin/uploads';
 
 const axiosUpload = axios.create({
   baseURL: API_URL,
@@ -14,7 +14,7 @@ const UploadService = {
   uploadImage: async (base64Image, type) => {
     const response = await axiosUpload.post('/upload', {
       image: base64Image,
-      type: type
+      type: type,
     });
     return response.data;
   },

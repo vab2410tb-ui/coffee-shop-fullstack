@@ -1,1 +1,22 @@
 @use 'reset';
+html {
+  height: auto !important;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  height: auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+ 
+}
+
