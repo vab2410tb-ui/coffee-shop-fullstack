@@ -26,6 +26,7 @@ const NavBar = () => {
     logout(); 
   };
 
+  console.log(userInfo)
   //     useEffect(() => {
   //     const fetchProducts = async () => {
   //         try {

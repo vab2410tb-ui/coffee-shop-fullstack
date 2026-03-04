@@ -1,22 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import authService from '../../service/authenticationService';
+import userService from '../../service/userService.js';
 import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from '../../features/AuthContext.jsx';
 
 
 const Auth = () => {
 
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
-  const [step, setStep] = useState(1); // 1: Nhập Email | 2: Nhập OTP
+  const [step, setStep] = useState(1); 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
   const location = useLocation();
   const navigate = useNavigate();
-
   const from = location.state?.from || "/";
+
+  const { login } = useContext(AuthContext);
   
+  const cleanOtp = otp.trim(); 
+
+
   const handleRequestOTP = async (e) => {
     e.preventDefault();
     if (!email) {
@@ -37,6 +43,7 @@ const Auth = () => {
       setLoading(false);
     }
   };
+  console.log("Dữ liệu chuẩn bị gửi đi:", { email, otp });
 
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
@@ -48,16 +55,26 @@ const Auth = () => {
     try {
       setLoading(true);
       setMessage('');
-      await authService.verifyOTP(email, otp);
+      
+  
+      const verifyResult = await authService.verifyOTP(email, cleanOtp); 
+      console.log("Bước 1: verifyOTP thành công!", verifyResult);
+
+      const userData = await userService.getProfile(); 
+      console.log("Bước 2: getProfile thành công!", userData);
+
+      login(userData); 
 
       alert('Login successful!');
       navigate(from, { replace: true });
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Invalid or expired OTP code!');
+      console.error(error);
+    
+      setMessage(error.response?.data?.message || error.message || 'Lỗi không xác định!');
     } finally {
       setLoading(false);
     }
-  };
+}
   return (
     <div
       style={{
@@ -78,7 +95,6 @@ const Auth = () => {
         {step === 1 ? 'Log in' : 'Enter code'}
       </p>
 
-      {/* Hiển thị thông báo lỗi/thành công */}
       {message && (
         <p
           style={{

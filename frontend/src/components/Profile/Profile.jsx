@@ -21,6 +21,7 @@ const Profile = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  
   const handleLogout = () => {
     localStorage.removeItem('userInfo');
     window.location.href = '/';

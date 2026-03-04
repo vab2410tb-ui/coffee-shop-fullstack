@@ -6,14 +6,20 @@ export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check login status on initial load
   useEffect(() => {
-    const storedUser = localStorage.getItem('userInfo');
-    if (storedUser) {
+  const storedUser = localStorage.getItem('userInfo');
+  
+
+  if (storedUser && storedUser !== 'undefined' && storedUser !== 'null') {
+    try {
       setUserInfo(JSON.parse(storedUser));
+    } catch (error) {
+      console.error("Lỗi phân tích dữ liệu user, đang tiến hành dọn dẹp:", error);
+      localStorage.removeItem('userInfo'); 
     }
-    setLoading(false);
-  }, []);
+  }
+  setLoading(false);
+}, []);
 
   const login = (userData) => {
     // After backend verifies and sends user data:
