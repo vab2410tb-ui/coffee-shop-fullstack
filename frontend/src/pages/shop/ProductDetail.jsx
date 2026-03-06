@@ -86,7 +86,7 @@ const ProductDetailPage = () => {
 
   return (
     <div className={productDetail.container}>
-      <PageTitle title={products.name} />
+      <PageTitle title={products?.name} />
       {/* ====== BEGIN LAYOUT: Production Detail ====== */}
       <div className={productDetail.product}>
         {/* ====== BEGIN LAYOUT: Hình ảnh sản phẩm ====== */}
@@ -138,7 +138,7 @@ const ProductDetailPage = () => {
               </p>
               <div style={{ display: 'flex', gap: '30px', marginTop: '10px', }}
               >
-                {products.variants.map((variant, index) => (
+                {products?.variants?.map((variant, index) => (
                   <button
                     key={index}
                     onClick={() => handleVariantChange(variant)}
