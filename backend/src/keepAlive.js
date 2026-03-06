@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const URL = "https://coffee-shop-website-0dfy.onrender.com"; 
 
-const keepAlive = () => {
+const keepPing = () => {
   setInterval(async () => {
     try {
       await axios.get(URL);
@@ -13,4 +13,4 @@ const keepAlive = () => {
   }, 14 * 60 * 1000);
 };
 
-export default keepAlive;
+export default keepPing;
