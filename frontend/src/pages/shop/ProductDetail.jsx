@@ -92,7 +92,7 @@ const ProductDetailPage = () => {
         {/* ====== BEGIN LAYOUT: Hình ảnh sản phẩm ====== */}
         <div className={productDetail.productImg}>
           {selectedVariant?.images?.length > 0 ? (
-            selectedVariant.images.map((img, index) => (
+            selectedVariant?.images?.map((img, index) => (
               <img
                 src={img || products.mainImage}
                 alt={products.name}
