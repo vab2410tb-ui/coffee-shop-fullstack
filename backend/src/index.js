@@ -23,6 +23,6 @@ db()
 
 route(app);
 
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`App listening on port http://localhost:${port}`)
 })
