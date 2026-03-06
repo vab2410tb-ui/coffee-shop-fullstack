@@ -1,15 +1,13 @@
 import User from '../models/user.modal.js';
 import jwt from 'jsonwebtoken';
 
-
 // ------------- [GỬI MÃ OTP QUA EMAILJS] ------------- 
 export const requestOTP = async (req, res) => {
     try {
         const { email } = req.body;
         
-        // Tạo mã OTP 6 số ngẫu nhiên
+        // Tạo mã OTP 6 số ngẫu nhiên dưới dạng chuỗi (String)
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
-        
         const otpExpires = new Date(Date.now() + 5 * 60 * 1000);
 
         let user = await User.findOne({ email });
@@ -22,7 +20,7 @@ export const requestOTP = async (req, res) => {
         }
         await user.save();
 
-        // GỌI API EMAILJS (Vượt tường lửa Render)
+        // GỌI API EMAILJS 
         const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -56,8 +54,8 @@ export const verifyOTP = async (req, res) => {
         const { email, otp } = req.body;
         const user = await User.findOne({ email });
 
-        // Kiểm tra user và so sánh trực tiếp 
-        if (!user || user.otp !== otp) {
+        // Ép kiểu String(otp) để tránh lỗi 400 do khác kiểu dữ liệu (số vs chữ)
+        if (!user || user.otp !== String(otp)) {
             return res.status(400).json({ message: 'Invalid OTP code' });
         }
 
@@ -109,12 +107,10 @@ export const updateUserProfile = async (req, res) => {
         const user = await User.findById(req.user._id);
 
         if (user) {
-            // Cập nhật Tên, SĐT, Địa chỉ 
             user.name = req.body.name || user.name;
             user.phone = req.body.phone || user.phone;
             user.address = req.body.address || user.address;
             
-            // Xử lý riêng cho Email (tránh trùng lặp email với người khác)
             if (req.body.email && req.body.email !== user.email) {
                 const emailExists = await User.findOne({ email: req.body.email });
                 if (emailExists) {
@@ -123,7 +119,6 @@ export const updateUserProfile = async (req, res) => {
                 user.email = req.body.email;
             }
 
-            // Lưu thông tin mới vào DB
             const updatedUser = await user.save();
 
             res.json({
