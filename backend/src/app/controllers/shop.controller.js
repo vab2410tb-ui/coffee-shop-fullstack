@@ -2,13 +2,13 @@ import Products from "../models/products.model.js";
 
 const shopController = {
     
-    // [GET] /api/v1/products/category/:slug
+    // 1. [LẤY SẢN PHẨM DỰA TRÊN DANH MỤC] [GET]
     getProductsByCategory: async (req, res) => {
     try {
         const { slug } = req.params; 
         const { sort } = req.query;  
 
-        // 1. điều kiện lọc
+        // Lọc filter
         const filter = { category: slug };
         let sortCondition = {};
         
@@ -24,10 +24,9 @@ const shopController = {
             sortCondition.createdAt = -1; 
         }
 
-        // 3. filter và sort
+        // filter và sort
         const products = await Products.find(filter).sort(sortCondition);
 
-        // 4. return 
         return res.status(200).json({
             success: true,
             count: products.length,
@@ -35,7 +34,7 @@ const shopController = {
         });
 
     } catch (error) {
-        // 5. xử lý lỗi
+
         console.error("Error fetching category:", error);
         return res.status(500).json({
             success: false,
@@ -43,7 +42,7 @@ const shopController = {
         });
     }
 },
-    // [GET] /api/v1/products/:sku
+    // 2. [ LẤY MÃ SẢN PHẨM TRONG KHO] [GET]
     getProductsBySku : async (req, res) => {
         const { sku } = req.params;
         try {
@@ -59,7 +58,7 @@ const shopController = {
             });
         }
     },
-    // [GET] /api/v1/products
+    // 3. [ LẤY TẤT CẢ SẢN PHẨM ] [GET]
     getAllProducts: async (req, res) => {
         try {
             const products = await Products.find({});
@@ -75,7 +74,7 @@ const shopController = {
         }
     },
 
-    // [GET] /api/v1/products/detail/:id
+    // 4. [ LẤY THÔNG TIN CHI TIẾT CỦA 1 SẢN PHẨM ] [GET]
     getProductDetail: async (req, res) => {
         try {
             const product = await Products.findById(req.params.id);

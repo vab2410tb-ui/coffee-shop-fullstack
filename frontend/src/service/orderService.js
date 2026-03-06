@@ -15,9 +15,9 @@ const OrderService = {
   },
 
   // Tra cứu đơn hàng theo ID
-  getOrderByID: async (orderId) => {
+  getOrderByID: async (orderId, email) => {
     try {
-      const response = await axios.get(`${API_URL}/${orderId}`);
+      const response = await axios.get(`${API_URL}/${orderId}/${email}`);
       return response.data;
     } catch (error) {
       throw error.response?.data?.message || 'Order not found.';

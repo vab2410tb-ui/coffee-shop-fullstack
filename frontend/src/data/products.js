@@ -1,5 +1,3 @@
-import { Link } from 'react-router';
-
 export const SlideData = [
   {
     src: 'https://res.cloudinary.com/drrao1nzd/image/upload/v1770301104/nab_coffee/products/main/rkruuoeuoajf2z5dzn3k.jpg',

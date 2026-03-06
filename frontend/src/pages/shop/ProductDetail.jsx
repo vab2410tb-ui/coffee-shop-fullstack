@@ -8,6 +8,7 @@ import productDetail from './productdetail.module.scss';
 import Loading from '../../components/Loading/Loading.jsx';
 import ProductAccordion from '../../components/ProductItem/ProductAccordion.jsx';
 import IntroProduct from '../../components/ProductItem/ProductIntro.jsx';
+import PageTitle from '../../components/PageTitle/PageTitle.jsx';
 
 const ProductDetailPage = () => {
   const { sku } = useParams();
@@ -33,7 +34,6 @@ const ProductDetailPage = () => {
   const isMaxedOut = curQtyInCart >= currentStock;
   const availableToAdd = currentStock - curQtyInCart;
 
-  // Disable nút Add to Cart nếu: hết hàng, đạt tối đa trong giỏ, hoặc (số lượng đang chọn + số trong giỏ) > kho
   const isDisabled = isOutOfStock || isMaxedOut || quantity > availableToAdd || isAdding;
 
   const handleDecrease = () => {
@@ -64,7 +64,6 @@ const ProductDetailPage = () => {
     setTimeout(() => setIsSuccess(false), 2000);
   };
 
-  // Khi người dùng click chọn màu khác
   const handleVariantChange = (variant) => {
     setSelectedVariant(variant);
     setQuantity(1);
@@ -87,6 +86,7 @@ const ProductDetailPage = () => {
 
   return (
     <div className={productDetail.container}>
+      <PageTitle title={products.name} />
       {/* ====== BEGIN LAYOUT: Production Detail ====== */}
       <div className={productDetail.product}>
         {/* ====== BEGIN LAYOUT: Hình ảnh sản phẩm ====== */}

@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faUser, faCartShopping, faChevronDown, faCircleUser, faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from '../../features/ContextProvider';
 import { AuthContext } from '../../features/AuthContext.jsx';
-import { useNavigate } from 'react-router-dom';
-import ProductService from '../../service/productService';
+// import { useNavigate } from 'react-router-dom';
+// import ProductService from '../../service/productService';
 import header from './navbar.module.scss';
 
 
@@ -14,19 +14,18 @@ const NavBar = () => {
   // const [products, setProducts] = useState('');
   const { userInfo, logout } = useContext(AuthContext);
   const { toggleCart, cart } = useContext(CartContext);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-  const goToCartPage = () => {
-    toggleCart(false); 
-    navigate('/cart'); 
-  };
+  // const goToCartPage = () => {
+  //   toggleCart(false); 
+  //   navigate('/cart'); 
+  // };
 
   const handleLogout = () => {
     logout(); 
   };
 
-  console.log(userInfo)
   //     useEffect(() => {
   //     const fetchProducts = async () => {
   //         try {

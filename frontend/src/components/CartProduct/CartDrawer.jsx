@@ -22,7 +22,7 @@ const CartDrawer = () => {
       document.body.style.overflow = 'auto';
     };
   }, [isCartOpen]);
-  console.log(cart);
+  
   if (location.pathname.toLowerCase().includes('/cart')) {
     return null;
   }

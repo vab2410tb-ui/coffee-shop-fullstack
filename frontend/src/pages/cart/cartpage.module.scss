@@ -71,6 +71,11 @@
       display: flex;
       justify-content: center;
       gap: 15px;
+      border: none;
+      &:hover{
+        opacity: .7;
+        cursor: pointer;
+      }
     }
   }
 

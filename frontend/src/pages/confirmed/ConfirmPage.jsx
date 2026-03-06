@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import orderService from '../../service/orderService.js';
 import confirm from './confirm.module.scss';
+import PageTitle from '../../components/PageTitle/PageTitle.jsx';
 
 const ConfirmPage = () => {
     const { orderId } = useParams();
@@ -41,6 +42,7 @@ const ConfirmPage = () => {
 
     return (
         <div className={confirm.container}>
+            <PageTitle title={`Order #${orderId} Success`} />
             <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                 <Link to="/">
                     <img src="/icon/image.png" alt="NabCoffeeShop" />

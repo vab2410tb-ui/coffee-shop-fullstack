@@ -6,34 +6,26 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import styles from './checkout.module.scss'; 
 import orderService from '../../service/orderService';
 import Loading from '../../components/Loading/Loading.jsx'
+import PageTitle from '../../components/PageTitle/PageTitle.jsx';
 
 const ACCORDION_PAYMENT = [
   {
-    id: 'cod',
+    id: 'COD',
     title: 'Cash on Delivery (COD)',
     content: 'You will pay upon delivery.'
   },
   {
-    id: 'qrbank',
+    id: 'QR',
     title: 'Bank Transfer',
     img: 'https://res.cloudinary.com/drrao1nzd/image/upload/v1772547266/qrbank_nqvj9u.jpg',
     content: 'Scan the QR code to complete the payment.'
   },
 ]
 const CheckoutPage = () => {
+
   const { cart, dispatch, toggleCart } = useContext(CartContext);
-  const [activeTabs, setActiveTabs] = useState([]);
+  // const [activeTabs, setActiveTabs] = useState([]);
   const navigate = useNavigate();
-
-  const toggleTab = (id) => {
-    setPaymentMethod(id);
-
-    if (activeTabs.includes(id)) {
-      setActiveTabs([]);
-    } else {
-      setActiveTabs([id]);
-    }
-  };
 
   useEffect(() => {
         return () => {
@@ -48,8 +40,6 @@ const CheckoutPage = () => {
     }
   }, []);
   
-  
-  
   const userInfoString = localStorage.getItem('userInfo');
   const userInfo = userInfoString ? JSON.parse(userInfoString) : null;
 
@@ -63,9 +53,7 @@ const CheckoutPage = () => {
     note: ''
   });
 
-  const savedNote = localStorage.getItem('savedNote')
-
-  const [paymentMethod, setPaymentMethod] = useState('cod'); 
+  const [paymentMethod, setPaymentMethod] = useState('COD'); 
   const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e) => {
@@ -135,9 +123,12 @@ const CheckoutPage = () => {
       }
     };
 
-
   return (
     <div className={styles.checkout_container} >
+      <PageTitle 
+        title="Checkout" 
+        description="Complete your order at NabCoffeeShop" 
+      />
       <div style={{display: 'flex', alignItems:'center', flexDirection:'column'}}>
         <Link to="/">
             <img src="/icon/image.png" alt="NabCoffeeShop" />
@@ -233,7 +224,7 @@ const CheckoutPage = () => {
             </div>
 
             <button type="submit" disabled={isLoading} className={styles.checkout_btn}>
-              {isLoading ? <Loading/> : paymentMethod === 'cod' ? 'Continue' : 'Pay now'}
+              {isLoading ? <Loading/> : paymentMethod === 'COD' ? 'Continue' : 'Pay now'}
             </button>
           </form>
         </div>

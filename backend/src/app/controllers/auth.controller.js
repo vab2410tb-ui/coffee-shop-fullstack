@@ -1,6 +1,7 @@
 import User from '../models/user.modal.js';
 import nodemailer from 'nodemailer';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
 // Cấu hình Nodemailer
 const transporter = nodemailer.createTransport({
@@ -15,20 +16,26 @@ const transporter = nodemailer.createTransport({
 export const requestOTP = async (req, res) => {
     try {
         const { email } = req.body;
-        const otp = Math.floor(100000 + Math.random() * 900000).toString();
-        const otpExpires = new Date(Date.now() + 5 * 60 * 1000); 
 
-        // Tìm user, nếu chưa có thì tạo mới, có rồi thì cập nhật
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+        // hash OTP
+        const salt = await bcrypt.genSalt(10);
+        const hashedOTP = await bcrypt.hash(otp, salt);
+
+        const otpExpires = new Date(Date.now() + 5 * 60 * 1000);
+
         let user = await User.findOne({ email });
+
         if (!user) {
-            user = new User({ email, otp, otpExpires });
+            user = new User({ email, otp: hashedOTP, otpExpires });
         } else {
-            user.otp = otp;
+            user.otp = hashedOTP;
             user.otpExpires = otpExpires;
         }
+
         await user.save();
 
-        // Gửi email
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: email,
@@ -39,6 +46,7 @@ export const requestOTP = async (req, res) => {
         await transporter.sendMail(mailOptions);
 
         res.status(200).json({ message: 'The OTP has been sent to your email!' });
+
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
@@ -110,7 +118,7 @@ export const updateUserProfile = async (req, res) => {
         const user = await User.findById(req.user._id);
 
         if (user) {
-            // Cập nhật Tên, SĐT, Địa chỉ (nếu có gửi lên thì lấy cái mới, không thì giữ nguyên cái cũ)
+            // Cập nhật Tên, SĐT, Địa chỉ 
             user.name = req.body.name || user.name;
             user.phone = req.body.phone || user.phone;
             user.address = req.body.address || user.address;

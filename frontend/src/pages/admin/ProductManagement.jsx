@@ -5,6 +5,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import ProductService from '../../service/productService.js';
 import AdminProductForm from '../../components/Admin/AdminProductForm.jsx';
 import product_mgmt from './productmanagement.module.scss';
+import PageTitle from '../../components/PageTitle/PageTitle.jsx';
 
 function ProductManagement() {
   const [products, setProducts] = useState([]);
@@ -54,6 +55,7 @@ function ProductManagement() {
 
   return (
     <div className={product_mgmt.container}>
+      <PageTitle title="Products" isAdmin />
       {/* Mục Inventory Management*/}
       <h1>Inventory Management</h1>
       <div className={product_mgmt.form}>

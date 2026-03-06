@@ -13,9 +13,7 @@ const Orders = () => {
     address: '',
   });
 
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  const [, setError] = useState('');
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem('userInfo');

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard, faBoxOpen, faScrewdriverWrench, faHandSparkles, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import cartpage from './cartpage.module.scss';
 import CarAccordion from '../../components/CartProduct/CartAccordion.jsx';
-
+import PageTitle from '../../components/PageTitle/PageTitle.jsx';
 
 const CartPage = () => {
 
@@ -33,6 +33,9 @@ const CartPage = () => {
 
   return (
     <div className={cartpage.container}>
+      <PageTitle 
+        title="Cart" 
+      />
       {cart.length > 0 ? (
         <div>
           <h1>Cart</h1>
@@ -223,7 +226,7 @@ const CartPage = () => {
                 <label htmlFor="note">Order note</label>
               </div>
 
-              <button style={{ marginTop: '20px' }} onClick={handleSubmit}>
+              <button className={cartpage.btnchcout}style={{ marginTop: '20px' }} onClick={handleSubmit}>
                 <FontAwesomeIcon icon={faCreditCard} />
                 Checkout
               </button>

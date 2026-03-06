@@ -4,6 +4,7 @@ import { CartContext } from '../../features/ContextProvider.jsx';
 import productService from '../../service/productService';
 import category from './categorypage.module.scss';
 import ProductItem from '../../components/ProductItem/ProductItem.jsx';
+import PageTitle from '../../components/PageTitle/PageTitle.jsx';
 
 const categoryConfig = {
   'espresso-machine': {
@@ -11,7 +12,7 @@ const categoryConfig = {
     banner: 'https://res.cloudinary.com/drrao1nzd/image/upload/v1771074757/BannerShopEM_eexbd2.jpg',
   },
   'coffee-beans': {
-    label: 'Beans Coffee',
+    label: 'Coffee Beans',
     banner: 'https://res.cloudinary.com/drrao1nzd/image/upload/v1771076026/BannerShopCB_kpmqzx.jpg',
   },
   accessories: {
@@ -52,6 +53,7 @@ const CategoryPage = () => {
 
   return (
     <div className={category.container}>
+      <PageTitle title={currentCategory.label}/>
       <div className={category.banner}>
         <img src={currentCategory.banner} alt={currentCategory.label} />
         <h1>{currentCategory.label}</h1>

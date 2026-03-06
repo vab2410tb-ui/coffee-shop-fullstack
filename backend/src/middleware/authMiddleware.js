@@ -12,8 +12,7 @@ export const protect = async (req, res, next) => {
             // Dùng JWT_SECRET trong .env để giải mã
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-            // Tìm user trong DB dựa vào cái ID vừa giải mã được, và gán vào req.user
-            req.user = await User.findById(decoded.id).select('-otp -otpExpires'); // Dùng .select('-otp -otpExpires') để bảo mật, không trả về các trường chứa mã OTP
+            req.user = await User.findById(decoded.id).select('-otp -otpExpires');
 
             next(); // cotinue controller
         } catch (error) {

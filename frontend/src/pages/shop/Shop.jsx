@@ -1,10 +1,12 @@
 import shop from './shop.module.scss';
 import { Link } from 'react-router-dom';
+import PageTitle from '../../components/PageTitle/PageTitle';
 
 const Shop = () => {
   return (
     <>
       <div className={shop.container}>
+        <PageTitle title="Shop"/>
         <div className={shop.banner}>
           <img
             src="https://res.cloudinary.com/drrao1nzd/image/upload/v1770301244/nab_coffee/products/main/uqx7jeunz3lonjaoztai.jpg"

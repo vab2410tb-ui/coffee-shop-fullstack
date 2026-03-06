@@ -3,13 +3,14 @@ import { createOrder, getOrderByOrderId, getUserOrders } from '../app/controller
 
 const router = express.Router();
 
-// Route tạo đơn hàng (Bạn đã làm xong)
+// Route tạo đơn hàng 
 router.post('/', createOrder);
 
-// Route lấy 1 đơn hàng theo mã NAB-... (VD: /api/v1/orders/NAB-20240522-A1B2C)
-router.get('/:id', getOrderByOrderId);
+// Route lấy 1 đơn hàng theo mã 
+// (/api/v1/orders/:id/:email)
+router.get('/:id/:email', getOrderByOrderId);
 
-// Route lấy danh sách đơn hàng của User (VD: /api/v1/orders/user/64a7b...)
+// Route lấy danh sách đơn hàng của User 
 router.get('/user/:userId', getUserOrders);
 
 export default router;

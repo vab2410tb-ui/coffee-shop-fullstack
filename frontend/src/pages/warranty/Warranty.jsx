@@ -1,7 +1,11 @@
+import PageTitle from '../../components/PageTitle/PageTitle';
 import warranty from './warranty.module.scss';
+
+
 const WarrantyPage = () => {
   return (
     <div className={warranty.container}>
+      <PageTitle title="Warranty"/>
       <h1>WARRANTY POLICY</h1>
       <p>
         At NabCoffeeShop, we pride ourselves on offering office furniture and peripherals that are

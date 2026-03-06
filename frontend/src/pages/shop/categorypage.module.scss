@@ -40,7 +40,7 @@
   .productslist {
     display: flex;
     flex-wrap: wrap;
-    margin-inline: 110px;
+    margin-inline: max(100px, 50% - 850px);
     margin-bottom: 150px;
     column-gap: 15px;
     row-gap: 130px;

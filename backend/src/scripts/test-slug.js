@@ -9,7 +9,7 @@ const checkData = async () => {
     // 1. Kết nối DB
     const dbUri = process.env.MONGO_URI ;
     await mongoose.connect(dbUri);
-    console.log(" Đã kết nối DB thành công!");
+    console.log("Đã kết nối DB thành công!");
 
     // 2. Đếm tổng số sản phẩm
     const count = await Product.countDocuments();
@@ -22,26 +22,21 @@ const checkData = async () => {
 
     // 3. Lấy thử 3 sản phẩm bất kỳ ra xem
     const samples = await Product.find().limit(3);
-
-    console.log("------------------------------------------------");
-    console.log("📝 DANH SÁCH MẪU (3 SẢN PHẨM ĐẦU TIÊN):");
-    console.log("------------------------------------------------");
-    
+  
     samples.forEach(p => {
       console.log(` SKU:   ${p.sku}`);
       console.log(` Tên:   ${p.name}`);
-      console.log(` Slug:  ${p.slug}`); // Kiểm tra xem slug có tự tạo ra không
+      console.log(` Slug:  ${p.slug}`); 
       console.log(` Giá:   ${p.price.toLocaleString('vi-VN')} VND`);
       console.log(` Loại:  ${p.category}`);
       console.log("- - - - - - - - - - - - - - - - - - - -");
     });
 
   } catch (error) {
-    console.error("❌ Lỗi:", error.message);
+    console.error("error:", error.message);
   } finally {
-    // 4. Ngắt kết nối
     await mongoose.disconnect();
-    console.log(" Đã đóng kết nối.");
+    console.log("Connection closed.");
   }
 };
 
