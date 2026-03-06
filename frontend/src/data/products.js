@@ -1,6 +1,6 @@
 export const SlideData = [
   {
-    src: 'https://res.cloudinary.com/drrao1nzd/image/upload/v1770301104/nab_coffee/products/main/rkruuoeuoajf2z5dzn3k.jpg',
+    src: 'https://res.cloudinary.com/drrao1nzd/image/upload/v1772815713/bannerHome1_erphga.png',
     title: 'COFFEE MACHINE',
     title2: 'Modern Machines for Classic Taste',
     btn: 'SHOP NOW',

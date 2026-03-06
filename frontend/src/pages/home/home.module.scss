@@ -7,13 +7,17 @@
   .sliderWrapper {
     margin-top: 102px;
     display: flex;
-    transform: translateX(calc(var(--current-index) * -101%));
+    transform: translateX(calc(var(--current-index) * -100%));
     transition: transform 0.5s ease-in-out;
 
     .banner {
       position: relative;
+      flex: 0 0 100%; 
+    width: 100%;
       img {
         display: block;
+        width: 100%;
+        object-fit: cover;
       }
       .title {
         position: absolute;
