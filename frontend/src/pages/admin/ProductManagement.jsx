@@ -26,7 +26,9 @@ function ProductManagement() {
   const fetchProducts = useCallback(async () => {
     try {
       const data = await ProductService.getAll(searchTerm, filterType, sortOrder);
-      setProducts(data);
+      const productArray = Array.isArray(data) ? data : data?.data || [];
+
+      setProducts(productArray);
     } catch (err) {
       console.error('Fetch products failed:', err);
     }
@@ -159,14 +161,15 @@ function ProductManagement() {
           </thead>
 
           <tbody>
-            {products.length === 0 ? (
+            {!Array.isArray(products) || products.length === 0 ? (
               <tr>
-                <td colSpan="5" style={{ padding: '20px', textAlign: 'center' }}>
+                {/* Lưu ý: Bảng của bạn có 7 thẻ <th> ở thead, nên colSpan phải là 7 thay vì 5 để không bị lệch giao diện */}
+                <td colSpan="7" style={{ padding: '20px', textAlign: 'center' }}>
                   No products found.
                 </td>
               </tr>
             ) : (
-              products?.map((p, index) => (
+              products.map((p, index) => (
                 <tr key={p._id} style={{ borderBottom: '1px solid #eee' }}>
                   {/* [No] */}
                   <td style={{ padding: '10px', textAlign: 'center' }}>{index + 1}</td>
