@@ -131,7 +131,7 @@ const ProductDetailPage = () => {
           {validVariants && validVariants.length > 0 && (
             <div style={{ marginTop: '15px', }} >
               <p style={{ fontSize: '22px', }} >
-                {' '} Color: {' '}
+                Color: 
                 <span style={{ fontSize: '22px', }} >
                   {selectedVariant?.color}
                 </span>
@@ -165,14 +165,19 @@ const ProductDetailPage = () => {
             {/* Điều kiện: Nếu còn hàng thì hiện add to cart, nếu hết hàng thì hiện out of stock */}
             {currentStock > 0 ? (
               <div className={productDetail.inStock}>
-                <img
-                  src="/icon/dotInStock.jpg"
-                  alt=""
-                  style={{
-                    height: '16px',
-                    width: '16px',
-                  }}
-                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <circle cx="8" cy="8" r="8" fill="#4D7C0F" fillOpacity="0.43" />
+                  <path
+                    d="M13 8C13 10.7614 10.7614 13 8 13C5.23858 13 3 10.7614 3 8C3 5.23858 5.23858 3 8 3C10.7614 3 13 5.23858 13 8Z"
+                    fill="#4D7C0F"
+                  />
+                </svg>
                 <p style={{margin:'0'}}> In stock, ready for delivery</p>
               </div>
             ) : (
@@ -274,7 +279,7 @@ const ProductDetailPage = () => {
                 <Loading />
               ) : isSuccess ? (
                 <>
-                  {' '}
+                  
                   Added <FontAwesomeIcon icon={faCheck} />
                 </>
               ) : isOutOfStock ? (
