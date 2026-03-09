@@ -6,7 +6,7 @@ import { policies } from '../../data/policy.data.js';
 import userService from '../../service/userService.js';
 import EditProfile from './EditProfile.jsx';
 import profile from './profile.module.scss';
-import PolicyModal from '../Policy/policy.jsx';
+import PolicyModal from '../../components/Policy/policy.jsx';
 
 const Profile = () => {
   const [isEditOpen, setIsEditOpen] = useState(false);

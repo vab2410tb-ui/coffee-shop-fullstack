@@ -58,14 +58,11 @@ const Auth = () => {
       
       // Lấy kết quả trả về từ Backend (Bao gồm cả Token)
       const verifyResult = await authService.verifyOTP(email, cleanOtp); 
-      console.log("Step 1: verifyOTP success!", verifyResult);
-
       // Lấy Token ra (Tuỳ vào file authService của bạn trả về data hay trả thẳng object)
       const freshToken = verifyResult.token || verifyResult.data?.token;
 
       // Truyền trực tiếp Token mới cứng vào để lấy Profile
       const userData = await userService.getProfile(freshToken); 
-      console.log("Step 2: getProfile success!", userData);
 
       const finalUserData = {
           ...userData,

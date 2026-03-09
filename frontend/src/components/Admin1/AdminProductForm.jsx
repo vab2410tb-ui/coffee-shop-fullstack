@@ -60,7 +60,7 @@ function AdminProductForm({ productId, onSuccess, onCancel }) {
   // Kiểm tra đang ở chế độ chỉnh sửa
   const isEdit = !!productId;
 
-  // Load dữ liệu sản phẩm khi vào trang chỉnh sửa
+
   useEffect(() => {
     if (isEdit) {
       ProductService.get(productId).then((res) => {

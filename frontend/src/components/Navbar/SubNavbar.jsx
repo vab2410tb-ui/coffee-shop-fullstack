@@ -1,0 +1,150 @@
+import { useState, useEffect } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import subnav from './subnavbar.module.scss';
+import userService from '../../service/userService';
+
+const SubNavbar = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        address: '',
+    });
+
+    const [error, setError] = useState('');
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem('userInfo');
+        window.location.href = '/';
+    };
+
+    useEffect(() => {
+        const fetchProfileData = async () => {
+            try {
+                const isAuthenticated = localStorage.getItem('userInfo');
+                if(!isAuthenticated) {
+                  navigate('/');
+                  return ;
+                }
+                const dataUser = await userService.getProfile();
+                setFormData(dataUser);
+
+            } catch (err) {
+                setError('Your session has expired. Please log in again!');
+                localStorage.removeItem('userInfo');
+                navigate('/login');
+            }
+        };
+        fetchProfileData();
+    }, [navigate]);
+
+    return (
+        <div>
+            {error && <p>{error}</p>}
+            <header>
+                <Link to="/">
+                    <img src="/icon/image.png" alt="NabCoffeeShop" width={80} />
+                </Link>
+
+                <NavLink
+                    to="/orders"
+                    style={({ isActive }) => ({
+                        textDecoration: isActive ? 'underline' : 'none',
+                        textUnderlineOffset: isActive ? '4px' : 'auto',
+                        fontWeight: isActive ? 'bold' : 'normal',
+                    })}
+                >
+                    Orders
+                </NavLink>
+
+                <NavLink
+                    to="/profile"
+                    style={({ isActive }) => ({
+                        textDecoration: isActive ? 'underline' : 'none',
+                        textUnderlineOffset: isActive ? '4px' : 'auto',
+                        fontWeight: isActive ? 'bold' : 'normal',
+                    })}
+                >
+                    Profile
+                </NavLink>
+
+                <li style={{ listStyle: 'none', marginLeft: 'auto' }}>
+                    <div className={subnav.down}>
+                        <div style={{ display: 'flex' }}>
+                            <FontAwesomeIcon icon={faCircleUser} style={{ fontSize: '25px' }} />
+                            <FontAwesomeIcon
+                                icon={faChevronDown}
+                                className={subnav.iconDown}
+                                style={{ fontSize: '20px' }}
+                            />
+                        </div>
+
+                        <ul className={subnav.listSetting}>
+                            <li
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '10px',
+                                    borderBottom: '1px solid',
+                                    paddingBottom: '20px',
+                                }}
+                            >
+                                <span>
+                                    <FontAwesomeIcon
+                                        icon={faCircleUser}
+                                        style={{ fontSize: '32px' }}
+                                    />
+                                </span>
+
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '10px',
+                                        color: '#222222',
+                                    }}
+                                >
+                                    <p>{formData.name}</p>
+                                    <p>{formData.email}</p>
+                                </div>
+                            </li>
+
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: '30px',
+                                    marginTop: '40px',
+                                }}
+                            >
+                                <Link to="/profile">
+                                    <p style={{ color: '#000', fontWeight: '300' }}>Profile</p>
+                                </Link>
+                                <p style={{ color: '#000', fontWeight: '300' }}>Orders</p>
+                                <p
+                                    onClick={handleLogout}
+                                    style={{
+                                        textAlign: 'left',
+                                        color: '#000',
+                                        border: 'none',
+                                        cursor: 'pointer',
+                                        fontWeight: '300',
+                                        marginBottom: '20px',
+                                    }}
+                                >
+                                    Log out
+                                </p>
+                            </div>
+                        </ul>
+                    </div>
+                </li>
+            </header>
+        </div>
+    );
+};
+
+export default SubNavbar;
