@@ -45,7 +45,7 @@ Our store is powered by Shopify, ensuring international security standards for y
 - Trade Name: nabcoffeeshop
 - Website: nabcfShop.com
 - Email: nabcfshop@gmail.com
-- Phone: 0934680724
-- Address: Vinhomes Gardenia City, Hanoi, Vietnam`,
+- Phone: 0973219402
+- Address: Bien Hoa. Dong Nai`,
   },
 };

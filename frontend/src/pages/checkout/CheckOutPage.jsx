@@ -23,15 +23,8 @@ const ACCORDION_PAYMENT = [
 ]
 const CheckoutPage = () => {
 
-  const { cart, dispatch, toggleCart } = useContext(CartContext);
-  // const [activeTabs, setActiveTabs] = useState([]);
+  const { cart, dispatch} = useContext(CartContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-        return () => {
-        toggleCart(false);
-        };
-  }, [toggleCart]);
 
   useEffect(() => {
     const savedNote = localStorage.getItem('savedNote');
