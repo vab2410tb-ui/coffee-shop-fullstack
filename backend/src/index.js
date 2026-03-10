@@ -26,5 +26,4 @@ route(app);
 
 app.listen(port, "0.0.0.0", () => {
   console.log(`App listening on port http://localhost:${port}`)
-  keepPing();
 })
