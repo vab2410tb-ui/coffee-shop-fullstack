@@ -1,13 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faUser, faCartShopping, faChevronDown, faCircleUser, faBoxOpen } from '@fortawesome/free-solid-svg-icons';
+import {
+  faMagnifyingGlass,
+  faUser,
+  faCartShopping,
+  faChevronDown,
+  faCircleUser,
+  faBoxOpen,
+} from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from '../../features/ContextProvider';
 import { AuthContext } from '../../features/AuthContext.jsx';
 // import { useNavigate } from 'react-router-dom';
 // import ProductService from '../../service/productService';
 import header from './navbar.module.scss';
-
 
 const NavBar = () => {
   // const [searchTerm, setSearchTerm] = useState("");
@@ -18,12 +24,12 @@ const NavBar = () => {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   // const goToCartPage = () => {
-  //   toggleCart(false); 
-  //   navigate('/cart'); 
+  //   toggleCart(false);
+  //   navigate('/cart');
   // };
 
   const handleLogout = () => {
-    logout(); 
+    logout();
   };
 
   //     useEffect(() => {
@@ -41,7 +47,6 @@ const NavBar = () => {
 
   return (
     <div>
-
       <div className={header.header}>
         <div className={header.header__logo}>
           <Link to="/" className={header.header__link}>
@@ -98,17 +103,38 @@ const NavBar = () => {
                   <FontAwesomeIcon icon={faChevronDown} />
                 </Link>
                 <ul className={header.iconUser_list}>
-                  <li style={{ display: 'flex', alignItems: 'center', gap: '10px', borderBottom: '1px solid', paddingBottom: '20px', }} >
+                  <li
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      borderBottom: '1px solid',
+                      paddingBottom: '20px',
+                    }}
+                  >
                     <span>
                       <FontAwesomeIcon icon={faCircleUser} style={{ fontSize: '32px' }} />
                     </span>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', color: '#222222', }} >
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '10px',
+                        color: '#222222',
+                      }}
+                    >
                       <p>{userInfo.name}</p>
                       <p>{userInfo.email}</p>
                     </div>
                   </li>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', marginTop: '40px', }}
-                      className={header.userSetting}
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '30px',
+                      marginTop: '40px',
+                    }}
+                    className={header.userSetting}
                   >
                     <Link to="/profile">
                       <p style={{ color: '#000', fontWeight: '300' }}>Profile</p>
@@ -116,7 +142,17 @@ const NavBar = () => {
 
                     <p style={{ color: '#000', fontWeight: '300' }}>Orders</p>
 
-                    <p onClick={handleLogout} style={{ textAlign: 'left', color: '#000', border: 'none', cursor: 'pointer', fontWeight: '300', marginBottom: '20px', }} >
+                    <p
+                      onClick={handleLogout}
+                      style={{
+                        textAlign: 'left',
+                        color: '#000',
+                        border: 'none',
+                        cursor: 'pointer',
+                        fontWeight: '300',
+                        marginBottom: '20px',
+                      }}
+                    >
                       Log out
                     </p>
                   </div>
@@ -173,8 +209,10 @@ const NavBar = () => {
       </div>
       <div className={header.title}>
         <span>Free Shipping on orders over 500.000₫</span>
-        <Link to='/search-order'>
-          <span> Track Your Order <FontAwesomeIcon icon={faBoxOpen} style={{marginLeft: '10px'}} /></span>
+        <Link to="/search-order">
+          <span>
+            Track Your Order <FontAwesomeIcon icon={faBoxOpen} style={{ marginLeft: '10px' }} />
+          </span>
         </Link>
       </div>
     </div>

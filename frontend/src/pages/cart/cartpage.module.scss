@@ -72,8 +72,8 @@
       justify-content: center;
       gap: 15px;
       border: none;
-      &:hover{
-        opacity: .7;
+      &:hover {
+        opacity: 0.7;
         cursor: pointer;
       }
     }
@@ -136,60 +136,59 @@
   }
 
   .accordion_container {
-  background-color: #f4f4f4;
-  border-radius: 20px;
-  overflow: hidden; 
-  margin-inline: 50px; 
-}
-
-.accordion_item {
-  margin-inline: 20px; 
-  border-bottom: 1px solid #3333331f;
-  &:last-child {
-    border-bottom: none !important;
+    background-color: #f4f4f4;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-inline: 50px;
   }
-}
 
-.accordion_header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 0; 
-  cursor: pointer;
-
-  h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 600;
-  }
-}
-
-.icon {
-  transition: transform 0.3s ease;
-  &.rotate {
-    transform: rotate(180deg);
-  }
-}
-
-.accordion_content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease-in-out;
-  
-  &.show {
-    max-height: 500px;
-  }
-}
-
-.accordion_inner {
-  padding-bottom: 25px;
-  ul {
-    padding-left: 20px;
-    li {
-      margin-top: 10px;
-      color: #555;
+  .accordion_item {
+    margin-inline: 20px;
+    border-bottom: 1px solid #3333331f;
+    &:last-child {
+      border-bottom: none !important;
     }
   }
-}
-  
+
+  .accordion_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    cursor: pointer;
+
+    h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+
+  .icon {
+    transition: transform 0.3s ease;
+    &.rotate {
+      transform: rotate(180deg);
+    }
+  }
+
+  .accordion_content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+
+    &.show {
+      max-height: 500px;
+    }
+  }
+
+  .accordion_inner {
+    padding-bottom: 25px;
+    ul {
+      padding-left: 20px;
+      li {
+        margin-top: 10px;
+        color: #555;
+      }
+    }
+  }
 }

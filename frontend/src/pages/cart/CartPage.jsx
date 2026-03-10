@@ -2,40 +2,43 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../features/ContextProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCreditCard, faBoxOpen, faScrewdriverWrench, faHandSparkles, faBookOpen } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCreditCard,
+  faBoxOpen,
+  faScrewdriverWrench,
+  faHandSparkles,
+  faBookOpen,
+} from '@fortawesome/free-solid-svg-icons';
 import cartpage from './cartpage.module.scss';
 import CarAccordion from '../../components/CartProduct/CartAccordion.jsx';
 import PageTitle from '../../components/PageTitle/PageTitle.jsx';
 
 const CartPage = () => {
+  const { cart, dispatch, toggleCart } = useContext(CartContext);
+  const [shippingInfo, setShippingInfo] = useState({ note: '' });
+  const totalPrice = cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
+  const navigate = useNavigate();
 
-    const { cart, dispatch, toggleCart } = useContext(CartContext);
-    const [shippingInfo, setShippingInfo] = useState({note: ''});
-    const totalPrice = cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
-    const navigate = useNavigate();
-    
-    const handleInputChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-      setShippingInfo({ ...shippingInfo, [name]: value });
+    setShippingInfo({ ...shippingInfo, [name]: value });
+  };
+  const handleSubmit = () => {
+    if (shippingInfo.note) {
+      localStorage.setItem('savedNote', shippingInfo.note);
+    }
+    navigate('/checkout');
+  };
+
+  useEffect(() => {
+    return () => {
+      toggleCart(false);
     };
-    const handleSubmit = () => {
-      if (shippingInfo.note) {
-          localStorage.setItem('savedNote', shippingInfo.note);
-      }
-      navigate('/checkout');
-};
-    
-    useEffect(() => {
-        return () => {
-          toggleCart(false);
-        };
-    }, [toggleCart]);
+  }, [toggleCart]);
 
   return (
     <div className={cartpage.container}>
-      <PageTitle 
-        title="Cart" 
-      />
+      <PageTitle title="Cart" />
       {cart.length > 0 ? (
         <div>
           <h1>Cart</h1>
@@ -222,11 +225,21 @@ const CartPage = () => {
 
               {/* Floating Label */}
               <div className={cartpage.ordernote} style={{ marginTop: '20px' }}>
-                <textarea id="note" name="note" placeholder=" " value={shippingInfo.note} onChange={handleInputChange}></textarea>
+                <textarea
+                  id="note"
+                  name="note"
+                  placeholder=" "
+                  value={shippingInfo.note}
+                  onChange={handleInputChange}
+                ></textarea>
                 <label htmlFor="note">Order note</label>
               </div>
 
-              <button className={cartpage.btnchcout}style={{ marginTop: '20px' }} onClick={handleSubmit}>
+              <button
+                className={cartpage.btnchcout}
+                style={{ marginTop: '20px' }}
+                onClick={handleSubmit}
+              >
                 <FontAwesomeIcon icon={faCreditCard} />
                 Checkout
               </button>
@@ -255,34 +268,37 @@ const CartPage = () => {
       )}
       <div className={cartpage.section}>
         <div className={cartpage.section_1}>
-            <h1 style={{marginTop:'-50px'}}>Have a question ?</h1>
-            <p>Our FAQs will help you quickly find answers to common questions about our products and services.</p>
-            <span>Average response time: 1 hour</span>
-            <div className={cartpage.block}>
-                <div>
-                    <FontAwesomeIcon icon={faBoxOpen} style={{fontSize: '35px'}}/>
-                    <p>Safe shipping</p>
-                    <p>Absolute protection for the products you order</p>
-                </div>
-                <div>
-                    <FontAwesomeIcon icon={faScrewdriverWrench} style={{fontSize: '35px'}} />
-                    <p>Professional installation</p>
-                    <p>Installation exactly where you want it</p>
-                </div>
-                <div>
-                    <FontAwesomeIcon icon={faHandSparkles} style={{fontSize: '35px'}}/>
-                    <p>Site Restoration</p>
-                    <p>Collect packaging and clean the installation space before leaving</p>
-                </div>
-                <div>
-                    <FontAwesomeIcon icon={faBookOpen} style={{fontSize: '35px'}} />
-                    <p>User Manual</p>
-                    <p>Ensure immediate mastery of the product</p>
-                </div>
+          <h1 style={{ marginTop: '-50px' }}>Have a question ?</h1>
+          <p>
+            Our FAQs will help you quickly find answers to common questions about our products and
+            services.
+          </p>
+          <span>Average response time: 1 hour</span>
+          <div className={cartpage.block}>
+            <div>
+              <FontAwesomeIcon icon={faBoxOpen} style={{ fontSize: '35px' }} />
+              <p>Safe shipping</p>
+              <p>Absolute protection for the products you order</p>
             </div>
+            <div>
+              <FontAwesomeIcon icon={faScrewdriverWrench} style={{ fontSize: '35px' }} />
+              <p>Professional installation</p>
+              <p>Installation exactly where you want it</p>
+            </div>
+            <div>
+              <FontAwesomeIcon icon={faHandSparkles} style={{ fontSize: '35px' }} />
+              <p>Site Restoration</p>
+              <p>Collect packaging and clean the installation space before leaving</p>
+            </div>
+            <div>
+              <FontAwesomeIcon icon={faBookOpen} style={{ fontSize: '35px' }} />
+              <p>User Manual</p>
+              <p>Ensure immediate mastery of the product</p>
+            </div>
+          </div>
         </div>
         <div>
-            <CarAccordion cartpage={cartpage}/>
+          <CarAccordion cartpage={cartpage} />
         </div>
       </div>
     </div>

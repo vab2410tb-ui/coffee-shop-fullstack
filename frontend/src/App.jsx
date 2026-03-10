@@ -29,18 +29,16 @@ const App = () => {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/search-order" element={<SearchOrder />} />
-
-         
         </Route>
 
         <Route element={<AuthLayout />}>
           <Route path="/authentic/login" element={<Auth />} />
         </Route>
-        
+
         <Route path="/confirmed/:orderId" element={<ConfirmPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/orders" element={<Orders />} />
+        <Route path="/profile/:userId?" element={<Profile />} />
+        <Route path="/orders/:userId?" element={<Orders />} />
         <Route path="/admin/products" element={<ProductManagement />} />
       </Routes>
     </div>

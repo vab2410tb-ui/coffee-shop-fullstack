@@ -7,19 +7,18 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  const storedUser = localStorage.getItem('userInfo');
-  
+    const storedUser = localStorage.getItem('userInfo');
 
-  if (storedUser && storedUser !== 'undefined' && storedUser !== 'null') {
-    try {
-      setUserInfo(JSON.parse(storedUser));
-    } catch (error) {
-      console.error("Lỗi phân tích dữ liệu user, đang tiến hành dọn dẹp:", error);
-      localStorage.removeItem('userInfo'); 
+    if (storedUser && storedUser !== 'undefined' && storedUser !== 'null') {
+      try {
+        setUserInfo(JSON.parse(storedUser));
+      } catch (error) {
+        console.error('Lỗi phân tích dữ liệu user, đang tiến hành dọn dẹp:', error);
+        localStorage.removeItem('userInfo');
+      }
     }
-  }
-  setLoading(false);
-}, []);
+    setLoading(false);
+  }, []);
 
   const login = (userData) => {
     // After backend verifies and sends user data:

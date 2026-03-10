@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { CartContext } from '../../features/ContextProvider.jsx';
-import productService from '../../service/productService.js'
+import productService from '../../service/productService.js';
 import category from './categorypage.module.scss';
 import ProductItem from '../../components/ProductItem/ProductItem.jsx';
 import PageTitle from '../../components/PageTitle/PageTitle.jsx';
@@ -53,7 +53,7 @@ const CategoryPage = () => {
 
   return (
     <div className={category.container}>
-      <PageTitle title={currentCategory.label}/>
+      <PageTitle title={currentCategory.label} />
       <div className={category.banner}>
         <img src={currentCategory.banner} alt={currentCategory.label} />
         <h1>{currentCategory.label}</h1>

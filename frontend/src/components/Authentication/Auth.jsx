@@ -2,26 +2,23 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import authService from '../../service/authenticationService';
 import userService from '../../service/userService.js';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../features/AuthContext.jsx';
 
-
 const Auth = () => {
-
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
-  const [step, setStep] = useState(1); 
+  const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from || "/";
+  const from = location.state?.from || '/';
 
   const { login } = useContext(AuthContext);
-  
-  const cleanOtp = otp.trim(); 
 
+  const cleanOtp = otp.trim();
 
   const handleRequestOTP = async (e) => {
     e.preventDefault();
@@ -43,7 +40,7 @@ const Auth = () => {
       setLoading(false);
     }
   };
-  console.log("Dữ liệu chuẩn bị gửi đi:", { email, otp });
+  console.log('Dữ liệu chuẩn bị gửi đi:', { email, otp });
 
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
@@ -52,21 +49,21 @@ const Auth = () => {
       return;
     }
 
-   try {
+    try {
       setLoading(true);
       setMessage('');
-      
+
       // Lấy kết quả trả về từ Backend (Bao gồm cả Token)
-      const verifyResult = await authService.verifyOTP(email, cleanOtp); 
+      const verifyResult = await authService.verifyOTP(email, cleanOtp);
       // Lấy Token ra (Tuỳ vào file authService của bạn trả về data hay trả thẳng object)
       const freshToken = verifyResult.token || verifyResult.data?.token;
 
       // Truyền trực tiếp Token mới cứng vào để lấy Profile
-      const userData = await userService.getProfile(freshToken); 
+      const userData = await userService.getProfile(freshToken);
 
       const finalUserData = {
-          ...userData,
-          token: freshToken 
+        ...userData,
+        token: freshToken,
       };
       login(finalUserData);
 
@@ -74,12 +71,12 @@ const Auth = () => {
       navigate(from, { replace: true });
     } catch (error) {
       console.error(error);
-    
+
       setMessage(error.response?.data?.message || error.message || 'Lỗi không xác định!');
     } finally {
       setLoading(false);
     }
-}
+  };
   return (
     <div
       style={{
