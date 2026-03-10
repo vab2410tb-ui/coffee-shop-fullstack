@@ -14,9 +14,9 @@ root.render(
     <BrowserRouter>
       <ScrollRestoration />
       <AuthProvider>
-      <ContextPorvider>
-        <App />
-      </ContextPorvider>
+        <ContextPorvider>
+          <App />
+        </ContextPorvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,

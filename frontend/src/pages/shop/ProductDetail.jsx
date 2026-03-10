@@ -24,8 +24,8 @@ const ProductDetailPage = () => {
 
   // Số lượng của màu đã chọn ở trong giỏ hàng
   const itemInCart = cart.find(
-  (item) => item._id === products?._id && item.colorCode === selectedVariant?.colorCode,
-);
+    (item) => item._id === products?._id && item.colorCode === selectedVariant?.colorCode,
+  );
   // Lọc sản phẩm có màu
   const validVariants = products?.variants?.filter((v) => v.color);
 
@@ -129,15 +129,12 @@ const ProductDetailPage = () => {
           </p>
           {/* Hiện màu sắc sản phẩm */}
           {validVariants && validVariants.length > 0 && (
-            <div style={{ marginTop: '15px', }} >
-              <p style={{ fontSize: '22px', }} >
-                Color: 
-                <span style={{ fontSize: '22px', }} >
-                  {selectedVariant?.color}
-                </span>
+            <div style={{ marginTop: '15px' }}>
+              <p style={{ fontSize: '22px' }}>
+                Color:
+                <span style={{ fontSize: '22px' }}>{selectedVariant?.color}</span>
               </p>
-              <div style={{ display: 'flex', gap: '30px', marginTop: '10px', }}
-              >
+              <div style={{ display: 'flex', gap: '30px', marginTop: '10px' }}>
                 {products?.variants?.map((variant, index) => (
                   <button
                     key={index}
@@ -178,7 +175,7 @@ const ProductDetailPage = () => {
                     fill="#4D7C0F"
                   />
                 </svg>
-                <p style={{margin:'0'}}> In stock, ready for delivery</p>
+                <p style={{ margin: '0' }}> In stock, ready for delivery</p>
               </div>
             ) : (
               <div className={productDetail.outOfStock}>
@@ -195,7 +192,7 @@ const ProductDetailPage = () => {
                     fill="#F42D2D"
                   />
                 </svg>
-                <p style={{margin:'0'}}>Sold out</p>
+                <p style={{ margin: '0' }}>Sold out</p>
               </div>
             )}
           </div>
@@ -279,7 +276,6 @@ const ProductDetailPage = () => {
                 <Loading />
               ) : isSuccess ? (
                 <>
-                  
                   Added <FontAwesomeIcon icon={faCheck} />
                 </>
               ) : isOutOfStock ? (

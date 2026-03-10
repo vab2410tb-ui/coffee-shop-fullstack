@@ -1,11 +1,18 @@
 header {
-  display: flex;
-  gap: 30px;
-  align-items: center;
   background-color: #f6f6f6;
-  padding-inline: 400px;
   height: 85px;
   margin-bottom: 40px;
+  height: 85px;
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    padding-inline: max(40px, calc((100% - 1200px) / 2));
+    margin: auto;
+    height: 100%;
+    position: relative;
+  }
 }
 
 .down {
@@ -29,7 +36,8 @@ header {
   position: absolute;
   margin-top: 20px;
   top: 100%;
-  left: 0;
+//   left: 0;
+right: 150px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
@@ -39,7 +47,8 @@ header {
   background: #f2f2f2;
   border-radius: 8px;
   border: 1px solid #d3d3d3;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);   
+ transition: right 0.5s ease-in-out;
   &::before {
     content: '';
     position: absolute;
@@ -49,4 +58,9 @@ header {
     height: 30px;
     background: transparent;
   }
+  @media (max-width: 1600px) {
+      left: auto; 
+      right: -10px;  
+    }
 }
+

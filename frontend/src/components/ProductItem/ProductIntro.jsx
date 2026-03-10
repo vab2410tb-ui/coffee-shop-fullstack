@@ -1,5 +1,4 @@
 const ProductIntro = ({ productDetail, products }) => {
-  
   const EssentialFeatures = () => {
     if (!products.description?.essentialFeatures?.length) return null;
     return (

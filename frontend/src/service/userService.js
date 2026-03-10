@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-
 const API_URL = `${process.env.REACT_APP_API_BASE_URL}/api/v1/authentication/profile`;
 
-// Hàm phụ trợ để tự động lấy Token từ localStorage đính kèm vào Header
 const getAuthHeader = () => {
   const userInfoString = localStorage.getItem('userInfo');
   if (userInfoString) {

@@ -6,23 +6,29 @@ import contact from './contact.module.scss';
 const ContactPage = () => {
   return (
     <div className={contact.container}>
-      <PageTitle 
-        title="Contact" 
-      />
+      <PageTitle title="Contact" />
       <h1>CONTACT</h1>
 
       <div className={contact.info}>
         <ul>
           <li>
-            <p><FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '20px' }} /> Address: N1 (Street), Trang Dai Ward, Dong Nai, Viet Nam.</p>
+            <p>
+              <FontAwesomeIcon icon={faEnvelope} style={{ marginRight: '20px' }} /> Address: N1
+              (Street), Trang Dai Ward, Dong Nai, Viet Nam.
+            </p>
           </li>
 
           <li>
-            <p><FontAwesomeIcon icon={faMap} style={{ marginRight: '20px' }} /> Hotline: 1900.393.979</p>
+            <p>
+              <FontAwesomeIcon icon={faMap} style={{ marginRight: '20px' }} /> Hotline: 1900.393.979
+            </p>
           </li>
 
           <li>
-            <p><FontAwesomeIcon icon={faPhoneVolume} style={{ marginRight: '20px' }} /> Email: nabcfshop@gmail.com</p>
+            <p>
+              <FontAwesomeIcon icon={faPhoneVolume} style={{ marginRight: '20px' }} /> Email:
+              nabcfshop@gmail.com
+            </p>
           </li>
         </ul>
       </div>
