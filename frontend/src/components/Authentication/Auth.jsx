@@ -68,7 +68,7 @@ const Auth = () => {
 
       alert('Login successful!');
 
-      if (userData.role === 'admin' || userData.isAdmin === true) {
+      if (userData.isAdmin === true) {
         navigate('/admin/products', { replace: true });
       } else {
         navigate(from, { replace: true });
