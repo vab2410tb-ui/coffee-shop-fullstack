@@ -36,7 +36,7 @@ function AdminProductForm({ productId, onSuccess, onCancel }) {
     name: '',
     price: '',
     sku: '',
-    brand: '',
+    brand: 'NAB Coffee',
     category: '',
     mainImage: '',
     variants: [{ color: '', colorCode: '', stock: '', images: [] }],
@@ -237,17 +237,15 @@ function AdminProductForm({ productId, onSuccess, onCancel }) {
         await ProductService.create(finalProductToSubmit);
         alert('Created successfully!');
       }
-      if (onSuccess) {
-        onSuccess();
-        return;
-      }
+      if (onSuccess) onSuccess();
     } catch (err) {
-      alert('Error occurred while saving the product!');
+      const serverMsg = err.response?.data?.message || "Error occurred while saving the product!";
+      alert("System Error: " + serverMsg);
+      console.error("Full error:", err.response?.data);
     } finally {
       setLoading(false);
     }
-  };
-
+  }
   return (
     // Form thông tin của sản phẩm
     <div className={form.container}>

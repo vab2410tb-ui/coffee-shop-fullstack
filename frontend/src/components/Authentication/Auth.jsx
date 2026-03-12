@@ -57,7 +57,7 @@ const Auth = () => {
       // Lấy Token ra (Tuỳ vào file authService của bạn trả về data hay trả thẳng object)
       const freshToken = verifyResult.token || verifyResult.data?.token;
 
-      // Truyền trực tiếp Token mới cứng vào để lấy Profile
+      // Truyền trực tiếp Token mới vào để lấy Profile
       const userData = await userService.getProfile(freshToken);
 
       const finalUserData = {
@@ -67,11 +67,17 @@ const Auth = () => {
       login(finalUserData);
 
       alert('Login successful!');
-      navigate(from, { replace: true });
+
+      if (userData.role === 'admin' || userData.isAdmin === true) {
+        navigate('/admin/products', { replace: true });
+      } else {
+        navigate(from, { replace: true });
+      }
+
     } catch (error) {
       console.error(error);
 
-      setMessage(error.response?.data?.message || error.message || 'Lỗi không xác định!');
+      setMessage(error.response?.data?.message || error.message || 'Error!');
     } finally {
       setLoading(false);
     }

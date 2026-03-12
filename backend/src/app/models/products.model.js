@@ -23,8 +23,8 @@ const productSchema = new mongoose.Schema({
 
   variants: [
     {
-      color: { type: String, required: true },     
-      colorCode: { type: String, required: true }, 
+      color: { type: String},     
+      colorCode: { type: String }, 
       stock: { type: Number, required: true, default: 0 }, 
       images: [{ type: String }]                   
     }

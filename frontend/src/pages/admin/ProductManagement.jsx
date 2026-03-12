@@ -270,7 +270,7 @@ useEffect(() => {
                                   padding: '4px 8px',
                                   borderRadius: '4px',
                                   fontWeight: 'bold',
-                                  color: variant.stock > 0 ? 'green' : 'red',
+                                  color: variant.stock > 0 ? '#27ae60' : '#e74c3c',
                                   backgroundColor: variant.stock > 0 ? '#ddeedf' : '#ffe6e6',
                                 }}
                               >
@@ -283,7 +283,7 @@ useEffect(() => {
                     ) : (
                       <span
                         style={{
-                          color: p.variants?.[0]?.stock > 0 ? 'green' : 'red',
+                          color: p.variants?.[0]?.stock > 0 ? '#27ae60' : '#e74c3c',
                           fontWeight: 'bold',
                           background: p.variants?.[0]?.stock > 0 ? '#ddeedf' : '#ffe6e6',
                           padding: '4px 8px',
@@ -306,7 +306,7 @@ useEffect(() => {
                     </button>
                     <button
                       onClick={() => handleDelete(p._id)}
-                      style={{ color: 'red', cursor: 'pointer', padding: '5px' }}
+                      style={{ color: '#e74c3c', cursor: 'pointer', padding: '5px' }}
                     >
                       Delete
                     </button>

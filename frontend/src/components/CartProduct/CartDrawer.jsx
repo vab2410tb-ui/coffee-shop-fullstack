@@ -33,7 +33,7 @@ const CartDrawer = () => {
         onClick={() => toggleCart(false)}
       ></div>
 
-      <div className={`${styles.drawer} ${isCartOpen ? styles.open : ''}`}>
+      <div className={`${styles.drawer} ${isCartOpen ? styles.open : ''}`} style={{zIndex:10000}}>
         <div className={styles.header}>
           <div className={styles.text}>
             <h2>Shopping Cart</h2>
