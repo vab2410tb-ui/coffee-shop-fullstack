@@ -129,31 +129,50 @@ function AdminProductForm({ productId, onSuccess, onCancel }) {
   const handleFileUpload = async (e, type) => {
     const file = e.target.files[0];
     if (!file) return;
-    
-    setLoading(true);
-    try {
-      // 1. Tạo hộp chứa FormData
-      const formData = new FormData();
-      
-      // 2. Bỏ file ảnh vào hộp chứa (tên 'image' phải khớp với upload.single('image') ở Node.js)
-      formData.append('image', file); 
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = async () => {
+      setLoading(true);
+      try {
+        // Call API upload ảnh
+        const response = await UploadService.uploadImage(reader.result, type);
+        // Lấy URL ảnh trả về
+        const imageUrl = response.url || response.data?.url;
 
-      // 3. Truyền hộp chứa (formData) và type sang UploadService. TUYỆT ĐỐI KHÔNG bọc {}
-      const response = await UploadService.uploadImage(formData, type);
-      const imageUrl = response.url || response.data?.url;
-
-      // ... (Phần if-else để setState giữ nguyên như cũ) ...
-      if (type === 'main') {
-        setProduct((prev) => ({ ...prev, mainImage: imageUrl }));
-        setErrors((prev) => ({ ...prev, mainImage: null }));
-      } // ... (giữ nguyên các đoạn else if khác)
-      
-    } catch (err) {
-      console.error('Lỗi khi upload ảnh:', err);
-      alert('Upload failed !!!');
-    } finally {
-      setLoading(false);
-    }
+        if (type === 'main') {
+          setProduct((prev) => ({ ...prev, mainImage: imageUrl }));
+          setErrors((prev) => ({ ...prev, mainImage: null }));
+        } else if (type === 'life') {
+          setProduct((prev) => ({
+            ...prev,
+            lifestyleImages: [...prev.lifestyleImages, imageUrl],
+          }));
+          if (lifestyleImagesRef.current) lifestyleImagesRef.current.value = '';
+        }
+        // ĐÂY LÀ PHẦN GỘP BANNER VÀO:
+        else if (type === 'banner') {
+          setProduct((prev) => ({
+            ...prev,
+            description: {
+              ...(prev.description || {}),
+              middleBannerImage: imageUrl,
+            },
+          }));
+          e.target.value = ''; // Reset input ngay tại event
+        } else {
+          // Mặc định là detail
+          setProduct((prev) => ({
+            ...prev,
+            detailImages: [...prev.detailImages, imageUrl],
+          }));
+          if (detailImagesRef.current) detailImagesRef.current.value = '';
+        }
+      } catch (err) {
+        alert('Upload failed !!!');
+      } finally {
+        setLoading(false);
+      }
+    };
   };
 
   // Upload ảnh riêng cho từng phân loại màu
