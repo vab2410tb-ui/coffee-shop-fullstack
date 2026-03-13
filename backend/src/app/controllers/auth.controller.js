@@ -91,7 +91,7 @@ export const getUserProfile = async (req, res) => {
                 email: user.email,     
                 phone: user.phone,     
                 address: user.address, 
-                role: user. isAdmin,
+                role: user.isAdmin,
             });
         } else {
             res.status(404).json({ message: 'User not found' });
