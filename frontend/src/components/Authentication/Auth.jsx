@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import authService from '../../service/authenticationService';
-import userService from '../../service/userService.js';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../features/AuthContext.jsx';
+import userService from '../../service/userService.js';
+import authService from '../../service/authenticationService';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -11,15 +11,26 @@ const Auth = () => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
-
+  const { login, userInfo } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+
   const from = location.state?.from || '/';
-
-  const { login } = useContext(AuthContext);
-
   const cleanOtp = otp.trim();
 
+  // [User load dữ liệu đầy đủ mới chuyển hướng trang]
+  useEffect(() => {
+    console.log("Dữ liệu userInfo hiện tại:", userInfo);
+    if(userInfo ) {
+      if(userInfo.isAdmin === true) {
+        navigate('/admin/products', {replace: true});
+      } else {
+        navigate(from, {replace: true})
+      }
+    }
+  },[userInfo , navigate, from])
+
+  // [Xử lý yêu cầu gửi OTP]
   const handleRequestOTP = async (e) => {
     e.preventDefault();
     if (!email) {
@@ -41,8 +52,10 @@ const Auth = () => {
     }
   };
 
+  // [Xử lý xác thực OTP]
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
+
     if (!otp) {
       setMessage('Please enter the OTP code!');
       return;
@@ -52,9 +65,8 @@ const Auth = () => {
       setLoading(true);
       setMessage('');
 
-      // Lấy kết quả trả về từ Backend (Bao gồm cả Token)
       const verifyResult = await authService.verifyOTP(email, cleanOtp);
-      // Lấy Token ra (Tuỳ vào file authService của bạn trả về data hay trả thẳng object)
+      // Lấy Token ra
       const freshToken = verifyResult.token || verifyResult.data?.token;
 
       // Truyền trực tiếp Token mới vào để lấy Profile
@@ -64,20 +76,14 @@ const Auth = () => {
         ...userData,
         token: freshToken,
       };
+
       login(finalUserData);
-
       alert('Login successful!');
-
-      if (userData.isAdmin === true) {
-        navigate('/admin/products', { replace: true });
-      } else {
-        navigate(from, { replace: true });
-      }
 
     } catch (error) {
       console.error(error);
-
       setMessage(error.response?.data?.message || error.message || 'Error!');
+
     } finally {
       setLoading(false);
     }
