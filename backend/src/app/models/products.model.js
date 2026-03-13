@@ -8,7 +8,8 @@ const productSchema = new mongoose.Schema({
     required: true, 
     unique: true, 
     trim: true,
-    uppercase: true 
+    uppercase: true,
+    index: true
   },
 
   slug: { 
@@ -35,7 +36,8 @@ const productSchema = new mongoose.Schema({
   category: { 
     type: String, 
     required: true, 
-    enum: ['espresso-machine', 'grinder-machine', 'coffee-beans', 'accessories']  
+    enum: ['espresso-machine', 'grinder-machine', 'coffee-beans', 'accessories'],
+    index: true
   },
 
   brand: { type: String, default: "La Marzocco" },

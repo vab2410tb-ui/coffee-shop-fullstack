@@ -1,9 +1,12 @@
 .container {
   padding-inline: max(20px, calc((100% - 1200px) / 2));
   flex: 1;
+  
   .cardOrder {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+
   }
 
   .cardItem {
