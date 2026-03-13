@@ -20,10 +20,8 @@ const Auth = () => {
 
   // [User load dữ liệu đầy đủ mới chuyển hướng trang]
   useEffect(() => {
-    console.log("Toàn bộ user:", userInfo);
-console.log("Giá trị của isAdmin là:", userInfo.role, "| Kiểu dữ liệu:", typeof userInfo.role);
     if(userInfo ) {
-      if(userInfo.role === true) {
+      if(userInfo.isAdmin === true) {
         navigate('/admin/products', {replace: true});
       } else {
         navigate(from, {replace: true})
