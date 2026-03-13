@@ -91,7 +91,7 @@ export const getUserProfile = async (req, res) => {
                 email: user.email,     
                 phone: user.phone,     
                 address: user.address, 
-                role: user.isAdmin,
+                isAdmin: user.isAdmin,
             });
         } else {
             res.status(404).json({ message: 'User not found' });
@@ -126,7 +126,7 @@ export const updateUserProfile = async (req, res) => {
                 email: updatedUser.email,
                 phone: updatedUser.phone,
                 address: updatedUser.address,
-                role: updatedUser.role,
+                isAdmin: updatedUser.isAdmin,
                 token: req.headers.authorization.split(' ')[1], 
             });
         } else {
