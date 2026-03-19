@@ -15,7 +15,7 @@ import CartPage from './pages/cart/CartPage.jsx';
 import CheckoutPage from './pages/checkout/CheckOutPage.jsx';
 import ConfirmPage from './pages/confirmed/ConfirmPage.jsx';
 import SearchOrder from './pages/searchOrder/SearchOrderPage.jsx';
-
+import AdminRoute from './components/Admin1/AdminRoute.jsx';
 
 const App = () => {
   return (
@@ -41,6 +41,7 @@ const App = () => {
         <Route path="/profile/:userId?" element={<Profile />} />
         <Route path="/orders/:userId?" element={<Orders />} />
         <Route path="/admin/products" element={<ProductManagement />} />
+        {/* <Route path="/admin/*" element={<AdminRoute><ProductManagement /></AdminRoute> } /> */}
       </Routes>
     </div>
   );

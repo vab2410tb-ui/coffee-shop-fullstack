@@ -1,4 +1,3 @@
-// File: src/middleware/authMiddleware.js
 import jwt from 'jsonwebtoken';
 import User from '../app/models/user.modal.js'; 
 
