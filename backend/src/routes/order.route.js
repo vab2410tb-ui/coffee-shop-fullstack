@@ -3,14 +3,15 @@ import { createOrder, getOrderByOrderId, getUserOrders } from '../app/controller
 
 const router = express.Router();
 
-// Route tạo đơn hàng 
+
+
 
 // Route lấy 1 đơn hàng theo mã 
-// (/api/v1/orders/:id/:email)
 router.get('/user/:userId', getUserOrders);
+// (/api/v1/orders/:id/:email)
 router.get('/:id/:email', getOrderByOrderId);
+// Route tạo đơn hàng 
 router.post('/', createOrder);
 
-// Route lấy danh sách đơn hàng của User 
 
 export default router;

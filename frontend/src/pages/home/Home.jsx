@@ -224,7 +224,7 @@ function Home() {
 
         {/* SECTION FOUR: ACCESSORIES */}
         <section className={`${home['introprd__section-2']}`}>
-          <h2>COFFEE BEANS</h2>
+          <h2>ACCESSORIES</h2>
           <div className={home.cardbeans}>
             {accessories?.map((product, index) => (
               <div key={index}>
